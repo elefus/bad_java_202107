@@ -1,4 +1,4 @@
-package com.bad_java._01;
+package com.bad_java.lectures._01;
 
 public class PrimitiveTypes {
 
