@@ -1,4 +1,4 @@
-package com.bad_java._01;
+package com.bad_java.lectures._01;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
