@@ -1,4 +1,4 @@
-package com.bad_java.first;
+package com.bad_java.lectures._00;
 
 public class Launcher {
 
