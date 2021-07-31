@@ -61,54 +61,6 @@ public class ObjectExample extends Object {
   }
 }
 
-
-class Color {
-  private final byte red;
-  private final byte green;
-  private final byte blue; // int [4 bytes] [0|red|green|blue]
-
-  public Color(byte red, byte green, byte blue) {
-    this.red = red;
-    this.green = green;
-    this.blue = blue;
-  }
-
-  public Color(int red, int green, int blue) {
-    this((byte)red, (byte)green, (byte)blue);
-  }
-
-  public byte getRed() {
-    return red;
-  }
-
-  public byte getGreen() {
-    return green;
-  }
-
-  public byte getBlue() {
-    return blue;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Color)) {
-      return false;
-    }
-    Color color = (Color) o;
-    return red == color.red && green == color.green && blue == color.blue;
-  }
-
-
-  // int [4 bytes] [0|red|green|blue]
-  @Override
-  public int hashCode() {
-    return (Byte.toUnsignedInt(red) << 16) | (Byte.toUnsignedInt(green) << 8) | Byte.toUnsignedInt(blue);
-  }
-}
-
 class TransparentColor extends Color {
 
   private int alpha;
