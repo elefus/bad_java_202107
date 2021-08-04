@@ -27,14 +27,14 @@ public class InterfaceExample {
 
     Square sqr = new Square(10);
     Rectangle rect = new Rectangle(1, 2);
-    GeometricShape[] shapes = {sqr, rect, new Square(20)};
+    AbstractGeometricShape[] shapes = {sqr, rect, new Square(20)};
 
-    class ShapeComparator implements Comparator<GeometricShape> {
+    class ShapeComparator implements Comparator<AbstractGeometricShape> {
 
       int field;
 
       @Override
-      public int compare(GeometricShape a, GeometricShape b) {
+      public int compare(AbstractGeometricShape a, AbstractGeometricShape b) {
         System.out.println("Called compare");
         return Double.compare(a.calcPerimeter(), b.calcPerimeter());
       }

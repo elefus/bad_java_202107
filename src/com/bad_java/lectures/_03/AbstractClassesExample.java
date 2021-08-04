@@ -12,7 +12,7 @@ public class AbstractClassesExample {
 //    rectangle.setA(15);
     System.out.println(rectangle.calcSquare() == 150);
 
-    GeometricShape shape = new Rectangle(1, 2);
+    AbstractGeometricShape shape = new Rectangle(1, 2);
     System.out.println(shape.getPoint2d());
 
     Integer squareSquare = rectangle.calcSquare();
@@ -42,15 +42,15 @@ class Point2d {
   }
 }
 
-abstract class GeometricShape implements Movable, Movable2, Cloneable, Serializable, Comparable {
+abstract class AbstractGeometricShape implements Movable, Movable2, Cloneable, Serializable, Comparable {
 
   protected Point2d point2d;
 
-  public GeometricShape(Point2d point2d) {
+  public AbstractGeometricShape(Point2d point2d) {
     this.point2d = point2d;
   }
 
-  public GeometricShape() {
+  public AbstractGeometricShape() {
     this.point2d = new Point2d();
   }
 
@@ -83,12 +83,19 @@ abstract class GeometricShape implements Movable, Movable2, Cloneable, Serializa
 
   @Override
   public int compareTo(Object o) {
-    GeometricShape other = (GeometricShape) o;
+    AbstractGeometricShape other = (AbstractGeometricShape) o;
     return Double.compare(calcSquare().doubleValue(), other.calcSquare().doubleValue());
+  }
+
+  @Override
+  public String toString() {
+    return "AbstractGeometricShape{" +
+        "point2d=" + point2d +
+        '}';
   }
 }
 
-class Rectangle extends GeometricShape {
+class Rectangle extends AbstractGeometricShape {
 
   private final int a;
   private final int b;
@@ -148,6 +155,8 @@ class Square extends Rectangle {
 
   @Override
   public String toString() {
+//    super.toString();
+//    super.super.toString(); // ERROR
     return "Square{" +
         "point2d=" + point2d + "," +
         "side=" + getA() +
