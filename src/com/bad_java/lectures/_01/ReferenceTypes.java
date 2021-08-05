@@ -7,7 +7,7 @@ import java.math.RoundingMode;
 
 public class ReferenceTypes {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         String word = new String();
 
         // header: 32-bit systems (8 byte)
