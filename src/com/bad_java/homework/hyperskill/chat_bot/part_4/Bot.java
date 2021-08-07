@@ -29,6 +29,7 @@ public class Bot {
             username = askForUsername();
             tryGuessUserAge();
             countToUserNumber();
+            sayGoodbye();
         }
     }
 
@@ -68,7 +69,6 @@ public class Bot {
     private void countToUserNumber() {
         final int numberToCount = askForNumber();
         countTo(numberToCount);
-        printlnMessage("Completed, have a nice day!");
     }
 
     private int askForNumber() {
@@ -84,6 +84,10 @@ public class Bot {
         for (int i = 0; i <= numberToCount; ++i) {
             printlnMessage(Integer.toString(i) + '!');
         }
+    }
+
+    private void sayGoodbye() {
+        printlnMessage("Completed, have a nice day!");
     }
 
     private void printlnMessage(String message) {
