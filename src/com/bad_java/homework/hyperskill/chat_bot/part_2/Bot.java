@@ -38,9 +38,13 @@ public class Bot {
     private String askForUsername() {
         printlnMessage("Please, remind me your name.");
 
-        final String username = scanner.nextLine();
+        final String username = getUsername();
         printlnMessage(String.format("What a great name you have, %s!", username));
         return username;
+    }
+
+    private String getUsername() {
+        return scanner.nextLine();
     }
 
     private void printlnMessage(String message) {
