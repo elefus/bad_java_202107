@@ -6,7 +6,6 @@ public class Bot {
         SimpleBot currentBot = new SimpleBot();
 
         User userToCommunicate = currentBot.registerUser();
-        currentBot.greetingUser(userToCommunicate);
     }
 
 }
