@@ -7,7 +7,6 @@ public class Warmup1 {
      * We sleep in if it is not a weekday or we're on vacation.
      * Return true if we sleep in.
      *
-     *
      * sleepIn(false, false) → true
      * sleepIn(true, false) → false
      * sleepIn(false, true) → true
