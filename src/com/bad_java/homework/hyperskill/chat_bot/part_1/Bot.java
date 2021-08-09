@@ -11,8 +11,7 @@ public class Bot {
     private final Scanner scanner;
 
     public Bot() {
-        printer = new PrintWriter(System.out);
-        scanner = new Scanner(System.in);
+        this(System.in, System.out);
     }
 
     public Bot(InputStream inputStream, OutputStream outputStream) {
