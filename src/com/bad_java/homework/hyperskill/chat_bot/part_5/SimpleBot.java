@@ -83,6 +83,7 @@ public class SimpleBot {
     public void end() {
         System.out.println("Congratulations, have a nice day!");
     }
+    
 }
 
 enum Answers {
