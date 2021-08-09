@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class SimpleBot {
@@ -8,11 +7,11 @@ public class SimpleBot {
 
     public static class SimpleBotAcquaintance {
         public static void sayHello() {
-            System.out.printf("Hello! My name is %s.\n", NAME);
+            System.out.printf("Hello! My name is %s.%n", NAME);
         }
 
         public static void sayDateOfBirthday() {
-            System.out.printf("I was created in %s.\n", DATE_OF_BIRTH);
+            System.out.printf("I was created in %s.%n", DATE_OF_BIRTH);
         }
     }
 
@@ -45,7 +44,7 @@ public class SimpleBot {
     }
 
     public void counting() {
-        System.out.println("Now I will prove to you that I can count to any number you want.\n Input a number? please");
+        System.out.println("Now I will prove to you that I can count to any number you want.%n Input a number? please");
         int numberToCountTo = inputFromConsole.nextInt() + 1;
         for (int i = 0; i < numberToCountTo; i++) {
             System.out.println(i + "!");
@@ -85,39 +84,43 @@ public class SimpleBot {
         System.out.println("Congratulations, have a nice day!");
     }
 }
+
 enum Answers {
     INCORRECT1(1, false, "1. To repeat a statement multiple times."),
     CORRECT(2, true, "2. To decompose a program into several small subroutines."),
     INCORRECT3(3, false, "3. To determine the execution time of a program."),
     INCORRECT4(4, false, "4. To interrupt the execution of a program.");
-    Answers(int number, boolean isTrue, String statement){
+
+    Answers(int number, boolean isTrue, String statement) {
         this.number = number;
         this.isTrue = isTrue;
         this.statement = statement;
     }
+
     public int getNumber() {
         return number;
     }
-    public boolean isTrue () {
+
+    public boolean isTrue() {
         return isTrue;
     }
 
     public static boolean getByCode(int number) {
         for (Answers curAnswer : Answers.values()) {
-            if(curAnswer.getNumber() == number){
+            if (curAnswer.getNumber() == number) {
                 return curAnswer.isTrue;
             }
         }
         return false;
     }
 
-    private final int number;
-    private final boolean isTrue;
-    private final String statement;
-
     @Override
     public String toString() {
         return statement;
     }
+
+    private final int number;
+    private final boolean isTrue;
+    private final String statement;
 
 }
