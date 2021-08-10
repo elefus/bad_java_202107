@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.chat_bot.part_1.CoffeeMachineProject;
+package com.bad_java.homework.hyperskill.CoffeeMachineProject;
 
 public enum Ingredients {
     WATER(200),
