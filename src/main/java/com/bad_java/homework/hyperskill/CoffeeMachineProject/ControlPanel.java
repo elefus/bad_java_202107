@@ -16,9 +16,15 @@ public class ControlPanel {
         System.out.println("Write action (buy, fill, take):");
         String operation = scanner.next();
         switch (operation) {
-            case "buy" -> choiceOfCoffee();
-            case "fill" -> addSupply();
-            case "take" -> takeMoney();
+            case "buy":
+                choiceOfCoffee();
+                break;
+            case "fill":
+                addSupply();
+                break;
+            case "take":
+                takeMoney();
+                break;
         }
         showCurrentSupply();
     }
