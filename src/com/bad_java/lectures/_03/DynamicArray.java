@@ -1,8 +1,9 @@
 package com.bad_java.lectures._03;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class DynamicArray {
+public class DynamicArray implements Iterable {
 
   private Object[] values;
   private int size;
@@ -86,5 +87,50 @@ public class DynamicArray {
   @Override
   public String toString() {
     return Arrays.toString(values);
+  }
+
+  @Override
+  public Iterator iterator() {
+    return new DynamicArrayIterator();
+  }
+
+  public void clean() {
+    values = new Object[0];
+    size = 0;
+  }
+
+  // static class => nested
+  // class => inner
+  private class DynamicArrayIterator implements Iterator {
+
+    private int position;
+
+    public DynamicArrayIterator() {
+      this(0);
+    }
+
+    public DynamicArrayIterator(int position) {
+      this.position = position;
+    }
+
+    // Empty dynamic array {}
+    // array.size = 0
+    // position = 0
+    // hasNext() => false
+
+    // Dynamic array {1}
+    // array.size = 1
+    // position = 0
+    // hasNext() => true
+
+    @Override
+    public boolean hasNext() {
+      return position != size;
+    }
+
+    @Override
+    public Object next() {
+      return values[position++];
+    }
   }
 }

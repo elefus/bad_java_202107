@@ -1,9 +1,11 @@
 package com.bad_java.lectures._03;
 
+import java.io.Serializable;
+
 // Bean
 // Spring Bean
 // EJB - Enterprise Java Bean
-class ColorBean {
+class ColorBean implements Serializable {
 
   private byte red;
   private byte green;
