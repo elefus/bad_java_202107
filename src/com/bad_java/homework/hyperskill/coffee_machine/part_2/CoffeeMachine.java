@@ -44,7 +44,15 @@ public class CoffeeMachine {
 
     private int askForNumberOfCups() {
         sendMessage("Write how many cups of coffee you will need:");
-        return getNextNumber();
+        return getNumberOfCups();
+    }
+
+    private int getNumberOfCups() {
+        int numberOfCups = getNextNumber();
+
+        // The input check code may be here in the future
+
+        return numberOfCups;
     }
 
     private int getNextNumber() {
