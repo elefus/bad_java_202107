@@ -35,14 +35,16 @@ public class CoffeeMachine {
     public void start() {
         try (printer; scanner) {
             showResources();
-
-            String actionType = askForAction();
-            ActionFactory actionFactory = new ActionFactoryImpl(inputStream, outputStream);
-            var action = actionFactory.create(actionType);
-            resources = action.act(resources);
-
+            takeNextAction();
             showResources();
         }
+    }
+
+    private void takeNextAction() {
+        String actionType = askForAction();
+        ActionFactory actionFactory = new ActionFactoryImpl(inputStream, outputStream);
+        var action = actionFactory.create(actionType);
+        resources = action.act(resources);
     }
 
     private String askForAction() {
