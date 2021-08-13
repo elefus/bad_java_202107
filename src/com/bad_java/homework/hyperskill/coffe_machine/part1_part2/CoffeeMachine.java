@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class CoffeeMachine {
 
   public static void main(String[] args) {
-
+    Scanner scanner = new Scanner(System.in);
     System.out.println("Starting to make a coffee");
     System.out.println("Grinding coffee beans");
     System.out.println("Boiling water");
@@ -14,16 +14,34 @@ public class CoffeeMachine {
     System.out.println("Pouring some milk into the cup");
     System.out.println("Coffee is ready!");
 
+    System.out.println("Write how many ml of water the coffee machine has: ");
+    int amountWater = scanner.nextInt();
+    System.out.println("Write how many ml of milk the coffee machine has: ");
+    int amountMilk = scanner.nextInt();
+    System.out.println("Write how many grams of coffee beans the coffee machine has: ");
+    int amountCoffee = scanner.nextInt();
+
     System.out.println("Write how many cups of coffee you will need:");
-    Scanner scanner = new Scanner(System.in);
     int countCups = scanner.nextInt();
-    int countWater = countCups * 200;
-    int countMilk = countCups * 50;
-    int countCoffeeBeans = countCups * 15;
-    System.out.println(" For" + countCups + " cups of coffee you will need:");
-    System.out.println(countWater + " ml of water");
-    System.out.println(countMilk + " ml of milk");
-    System.out.println(countCoffeeBeans + " g of coffee beans");
+
+    int counterCups = 0;
+    while (amountWater >= 200 && amountMilk >= 50 && amountCoffee >= 15) {
+      amountWater = amountWater - 200;
+      amountMilk = amountMilk - 50;
+      amountCoffee = amountCoffee - 15;
+      counterCups += 1;
+    }
+    if (countCups == counterCups) {
+      System.out.println("Yes, I can make that amount of coffee");
+    }
+    if (countCups < counterCups) {
+      System.out.println(
+          "Yes, I can make that amount of coffee" + " (and even " + (countCups - counterCups)
+              + " more than that)");
+    }
+    if (countCups > counterCups) {
+      System.out.println("No, I can make only " + (counterCups) + " cup(s) of coffee");
+    }
   }
 }
 
