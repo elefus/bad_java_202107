@@ -22,7 +22,7 @@ public class FirstCoffeeMachine extends CoffeeMachine{
 
     @Override
     public void countingIngredients() {
-        System.out.println("Write how many cups of coffee you will need: %n");
+        System.out.println("Write how many cups of coffee you will need: ");
         int numOfPortions = getNumberOfPortions();
         System.out.printf("For %d cups of coffee you will need: %n", numOfPortions);
         System.out.printf("%d ml of water %n", Ingredients.WATER.countAllAmount(numOfPortions));
@@ -33,7 +33,7 @@ public class FirstCoffeeMachine extends CoffeeMachine{
     @Override
     public void countOfAvailableServings() {
         addResources();
-        sendMessageAboutPossibleCup(maxAmountOfPossibleCups(), inputFromConsole.nextInt());
+        sendMessageAboutPossibleCup(maxAmountOfPossibleCups(), amountOfNeededCups());
     }
 
     private void addResources() {
@@ -70,6 +70,7 @@ public class FirstCoffeeMachine extends CoffeeMachine{
     }
 
     private int amountOfNeededCups() {
+        System.out.println("How many cups will you need? ");
         return inputFromConsole.nextInt();
     }
 
