@@ -1,35 +1,29 @@
 package com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.actions.factories;
 
+import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.IOHandler;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.actions.Action;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.actions.ActionBuy;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.actions.ActionFill;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.actions.ActionTake;
+import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.coffeemakers.factories.CoffeeMakerFactory;
+import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.coffeemakers.factories.CoffeeMakerFactoryImpl;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.exceptions.CoffeeMachineException;
-
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class ActionFactoryImpl implements ActionFactory {
 
-    private InputStream inputStream;
-    private OutputStream outputStream;
-
-    public ActionFactoryImpl(InputStream inputStream, OutputStream outputStream) {
-        this.inputStream = inputStream;
-        this.outputStream = outputStream;
-    }
+    private final static CoffeeMakerFactory coffeeMakerFactory = new CoffeeMakerFactoryImpl();
 
     @Override
-    public Action create(String type) {
+    public Action create(String type, IOHandler io) {
         switch (type) {
             case "buy":
-                return new ActionBuy(inputStream, outputStream);
+                return new ActionBuy(io, coffeeMakerFactory);
 
             case "fill":
-                return new ActionFill(inputStream, outputStream);
+                return new ActionFill(io);
 
             case "take":
-                return new ActionTake(inputStream, outputStream);
+                return new ActionTake(io);
 
             default:
                 throw new CoffeeMachineException("Unknown action");

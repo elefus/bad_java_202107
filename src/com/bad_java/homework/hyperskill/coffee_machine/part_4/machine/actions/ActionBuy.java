@@ -1,32 +1,32 @@
 package com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.actions;
 
+import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.IOHandler;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.Resources;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.coffeemakers.factories.CoffeeMakerFactory;
-import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.coffeemakers.factories.CoffeeMakerFactoryImpl;
-
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class ActionBuy extends Action {
-    public ActionBuy(InputStream inputStream, OutputStream outputStream) {
-        super(inputStream, outputStream);
+
+    private final CoffeeMakerFactory coffeeMakerFactory;
+
+    public ActionBuy(IOHandler io, CoffeeMakerFactory coffeeMakerFactory) {
+        super(io);
+        this.coffeeMakerFactory = coffeeMakerFactory;
     }
 
     @Override
     public Resources act(Resources resources) {
         int coffeeType = askForCoffeeType();
-        CoffeeMakerFactory coffeeMakerFactory = new CoffeeMakerFactoryImpl();
-        var coffeeMaker = coffeeMakerFactory.create(coffeeType);
+        var coffeeMaker = coffeeMakerFactory.create(coffeeType, io);
         return coffeeMaker.make(resources);
     }
 
     private int askForCoffeeType() {
-        sendMessage("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+        io.send("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
         return getCoffeeType();
     }
 
     private int getCoffeeType() {
-        int type = scanner.nextInt();
+        int type = io.readNumber();
 
         // The input check code may be here in the future
 
