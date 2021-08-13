@@ -1,28 +1,26 @@
 package com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.actions;
 
+import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.IOHandler;
 import com.bad_java.homework.hyperskill.coffee_machine.part_4.machine.Resources;
-
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class ActionFill extends Action {
 
-    public ActionFill(InputStream inputStream, OutputStream outputStream) {
-        super(inputStream, outputStream);
+    public ActionFill(IOHandler io) {
+        super(io);
     }
 
     @Override
     public Resources act(Resources resources) {
-        sendMessage("Write how many ml of water you want to add:");
+        io.send("Write how many ml of water you want to add:");
         int waterInMl = getWaterResourceInMl();
 
-        sendMessage("Write how many ml of milk you want to add:");
+        io.send("Write how many ml of milk you want to add:");
         int milkInMl = getMilkResourceInMl();
 
-        sendMessage("Write how many grams of coffee beans you want to add:");
+        io.send("Write how many grams of coffee beans you want to add:");
         int beansInGrams = getBeansResourceInGrams();
 
-        sendMessage("Write how many disposable cups of coffee you want to add:");
+        io.send("Write how many disposable cups of coffee you want to add:");
         int cups = getCupsResourceInGrams();
 
         return new Resources(
@@ -35,7 +33,7 @@ public class ActionFill extends Action {
     }
 
     private int getWaterResourceInMl() {
-        int waterIfMl = scanner.nextInt();
+        int waterIfMl = io.readNumber();
 
         // The input check code may be here in the future
 
@@ -43,7 +41,7 @@ public class ActionFill extends Action {
     }
 
     private int getMilkResourceInMl() {
-        int milkInMl = scanner.nextInt();
+        int milkInMl = io.readNumber();
 
         // The input check code may be here in the future
 
@@ -51,7 +49,7 @@ public class ActionFill extends Action {
     }
 
     private int getBeansResourceInGrams() {
-        int beansInGrams = scanner.nextInt();
+        int beansInGrams = io.readNumber();
 
         // The input check code may be here in the future
 
@@ -59,7 +57,7 @@ public class ActionFill extends Action {
     }
 
     private int getCupsResourceInGrams() {
-        int cups = scanner.nextInt();
+        int cups = io.readNumber();
 
         // The input check code may be here in the future
 
