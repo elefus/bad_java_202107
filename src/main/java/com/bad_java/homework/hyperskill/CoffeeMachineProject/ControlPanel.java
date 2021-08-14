@@ -4,16 +4,15 @@ import static com.bad_java.homework.hyperskill.CoffeeMachineProject.CoffeeMachin
 
 public class ControlPanel {
 
-    private static int totalMoneyAmount = 550;
     private static int totalWaterAmount = 400;
     private static int totalMilkAmount = 540;
     private static int totalCoffeeBeansAmount = 120;
     private static int totalCupsAmount = 9;
+    private static int totalMoneyAmount = 550;
 
 
     public static void choiceOfOperation() {
-        showCurrentSupply();
-        System.out.println("Write action (buy, fill, take):");
+        System.out.println("Write action (buy, fill, take, remaining, exit):");
         String operation = scanner.next();
         switch (operation) {
             case "buy":
@@ -25,13 +24,19 @@ public class ControlPanel {
             case "take":
                 takeMoney();
                 break;
+            case "remaining":
+                showCurrentSupply();
+                choiceOfOperation();
+                break;
+            case "exit":
+                break;
         }
-        showCurrentSupply();
     }
 
     private static void takeMoney() {
         System.out.printf("I gave you $%d%n", totalMoneyAmount);
         totalMoneyAmount = 0;
+        choiceOfOperation();
     }
 
     private static void addSupply() {
@@ -48,25 +53,43 @@ public class ControlPanel {
         totalMilkAmount += addedMilk;
         totalCoffeeBeansAmount += addedCoffeeBeans;
         totalCupsAmount += addedCups;
+        choiceOfOperation();
     }
 
     private static void choiceOfCoffee() {
-        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
-        int coffeeVariant = scanner.nextInt();
+        Coffee coffee = null;
+        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino,"
+            + " back - to main menu:");
+        String operation = scanner.next();
 
-        Coffee coffee;
-        if (coffeeVariant == 1) {
+        if (operation.equals("back")) {
+        } else if (Integer.valueOf(operation) == 1) {
             coffee = new Espresso();
-        } else if (coffeeVariant == 2) {
+        } else if (Integer.valueOf(operation) == 2) {
             coffee = new Latte();
-        } else {
+        } else if (Integer.valueOf(operation) == 3) {
             coffee = new Cappuccino();
         }
-        totalWaterAmount -= coffee.getWaterAmount();
-        totalMilkAmount -= coffee.getMilkAmount();
-        totalCoffeeBeansAmount -= coffee.getCoffeeBeansAmount();
-        totalMoneyAmount += coffee.getPrice();
-        totalCupsAmount--;
+
+        if (coffee != null) {
+            if (totalWaterAmount - coffee.getWaterAmount() < 0) {
+                System.out.println("Sorry, not enough water!");
+            } else if (totalMilkAmount - coffee.getMilkAmount() < 0) {
+                System.out.println("Sorry, not enough milk!");
+            } else if (totalCoffeeBeansAmount - coffee.getCoffeeBeansAmount() < 0) {
+                System.out.println("Sorry, not enough coffee beans!");
+            } else if (totalCupsAmount - 1 < 0) {
+                System.out.println("Sorry, not enough coffee cups!");
+            } else {
+                totalWaterAmount -= coffee.getWaterAmount();
+                totalMilkAmount -= coffee.getMilkAmount();
+                totalCoffeeBeansAmount -= coffee.getCoffeeBeansAmount();
+                totalMoneyAmount += coffee.getPrice();
+                totalCupsAmount--;
+                System.out.println("I have enough resources, making you a coffee!");
+            }
+        }
+        choiceOfOperation();
     }
 
     private static void showCurrentSupply() {

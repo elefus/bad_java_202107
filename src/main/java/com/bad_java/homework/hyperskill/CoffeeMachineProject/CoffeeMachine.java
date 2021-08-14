@@ -13,7 +13,6 @@ public class CoffeeMachine {
         //findNeededAmountOfIngredients();
         //findAvailableAmountOfCoffee();
         ControlPanel.choiceOfOperation();
-
     }
 
     static void findNeededAmountOfIngredients() {
