@@ -61,8 +61,8 @@ public class ControlPanel {
         System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino,"
             + " back - to main menu:");
         String operation = scanner.next();
-
         if (operation.equals("back")) {
+            choiceOfOperation();
         } else if (Integer.valueOf(operation) == 1) {
             coffee = new Espresso();
         } else if (Integer.valueOf(operation) == 2) {
@@ -71,23 +71,21 @@ public class ControlPanel {
             coffee = new Cappuccino();
         }
 
-        if (coffee != null) {
-            if (totalWaterAmount - coffee.getWaterAmount() < 0) {
-                System.out.println("Sorry, not enough water!");
-            } else if (totalMilkAmount - coffee.getMilkAmount() < 0) {
-                System.out.println("Sorry, not enough milk!");
-            } else if (totalCoffeeBeansAmount - coffee.getCoffeeBeansAmount() < 0) {
-                System.out.println("Sorry, not enough coffee beans!");
-            } else if (totalCupsAmount - 1 < 0) {
-                System.out.println("Sorry, not enough coffee cups!");
-            } else {
-                totalWaterAmount -= coffee.getWaterAmount();
-                totalMilkAmount -= coffee.getMilkAmount();
-                totalCoffeeBeansAmount -= coffee.getCoffeeBeansAmount();
-                totalMoneyAmount += coffee.getPrice();
-                totalCupsAmount--;
-                System.out.println("I have enough resources, making you a coffee!");
-            }
+        if (totalWaterAmount - coffee.getWaterAmount() < 0) {
+            System.out.println("Sorry, not enough water!");
+        } else if (totalMilkAmount - coffee.getMilkAmount() < 0) {
+            System.out.println("Sorry, not enough milk!");
+        } else if (totalCoffeeBeansAmount - coffee.getCoffeeBeansAmount() < 0) {
+            System.out.println("Sorry, not enough coffee beans!");
+        } else if (totalCupsAmount - 1 < 0) {
+            System.out.println("Sorry, not enough coffee cups!");
+        } else {
+            totalWaterAmount -= coffee.getWaterAmount();
+            totalMilkAmount -= coffee.getMilkAmount();
+            totalCoffeeBeansAmount -= coffee.getCoffeeBeansAmount();
+            totalMoneyAmount += coffee.getPrice();
+            totalCupsAmount--;
+            System.out.println("I have enough resources, making you a coffee!");
         }
         choiceOfOperation();
     }
