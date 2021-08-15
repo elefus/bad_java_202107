@@ -70,12 +70,12 @@ public class MachineImpl implements Machine {
 	}
 
 	private void printIngredientsInMachine() {
-		System.out.println("The coffee machine has:");
-		System.out.printf("%d ml of water%n", ingredientsInMachine.get(Ingredients.WATER));
-		System.out.printf("%d ml of milk%n", ingredientsInMachine.get(Ingredients.MILK));
-		System.out.printf("%d g of coffee beans%n", ingredientsInMachine.get(Ingredients.BEANS));
-		System.out.printf("%d disposable cups%n", ingredientsInMachine.get(Ingredients.CUPS));
-		System.out.printf("$%d of money%n", ingredientsInMachine.get(Ingredients.MONEY));
+		printWriter.println("The coffee machine has:");
+		printWriter.printf("%d ml of water%n", ingredientsInMachine.get(Ingredients.WATER));
+		printWriter.printf("%d ml of milk%n", ingredientsInMachine.get(Ingredients.MILK));
+		printWriter.printf("%d g of coffee beans%n", ingredientsInMachine.get(Ingredients.BEANS));
+		printWriter.printf("%d disposable cups%n", ingredientsInMachine.get(Ingredients.CUPS));
+		printWriter.printf("$%d of money%n", ingredientsInMachine.get(Ingredients.MONEY));
 	}
 
 	private void takeMoneyFromMachine() {
@@ -91,11 +91,11 @@ public class MachineImpl implements Machine {
 			try {
 				action = Action.valueOf(scanner.nextLine().toUpperCase());
 			} catch (IllegalArgumentException e) {
-				System.out.println("No such action");
-				System.out.println("Write action again");
+				printWriter.println("No such action");
+				printWriter.println("Write action again");
 			}
 		}
-		System.out.println();
+		printWriter.println();
 		return action;
 	}
 
@@ -137,8 +137,8 @@ public class MachineImpl implements Machine {
 				}
 			} catch (NumberFormatException e) {
 				coffeeTypeNumber = 0;
-				System.out.println("No such coffee type");
-				System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+				printWriter.println("No such coffee type");
+				printWriter.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
 			}
 		}
 
@@ -176,7 +176,7 @@ public class MachineImpl implements Machine {
 					printIngredientsInMachine();
 					break;
 			}
-			System.out.println();
+			printWriter.println();
 			action = chooseAction();
 		}
 
