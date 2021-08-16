@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.ingredients;
 
 public interface Ingredient {
     int getAmount();

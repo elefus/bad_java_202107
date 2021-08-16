@@ -1,11 +1,13 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.coffee;
 
-public class Milk implements Ingredient{
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.ingredients.Ingredient;
+
+public class Milk implements Ingredient {
 
     private int amount;
     private final String unit = "ml";
 
-    Milk(int amount) {
+    public Milk(int amount) {
         this.amount = amount;
     }
     public int getAmount() {

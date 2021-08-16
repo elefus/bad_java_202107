@@ -1,9 +1,11 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.coffee;
+
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.ingredients.Resources;
 
 public abstract class Coffee {
     protected final Resources recipy;
 
-    Coffee(int water, int milk, int beans, int cost) {
+    public Coffee(int water, int milk, int beans, int cost) {
         this.recipy = new Resources(water, milk, beans, 1, cost);
     }
 

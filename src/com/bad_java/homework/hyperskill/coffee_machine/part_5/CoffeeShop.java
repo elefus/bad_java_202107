@@ -1,5 +1,7 @@
 package com.bad_java.homework.hyperskill.coffee_machine.part_5;
 
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.actions.Action;
+
 public class CoffeeShop {
     public static void main(String[] args) {
         CoffeeMachine myMachine = new FirstCoffeeMachine();

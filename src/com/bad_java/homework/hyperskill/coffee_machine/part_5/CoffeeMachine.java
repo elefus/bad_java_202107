@@ -1,5 +1,10 @@
 package com.bad_java.homework.hyperskill.coffee_machine.part_5;
 
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.actions.Action;
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.coffee.Coffee;
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.ingredients.Ingredient;
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.ingredients.Resources;
+
 import java.io.InputStream;
 import java.io.PrintStream;
 

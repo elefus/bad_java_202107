@@ -1,4 +1,6 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.ingredients;
+
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.coffee.Milk;
 
 public class Resources {
     private Ingredient waterAmount;

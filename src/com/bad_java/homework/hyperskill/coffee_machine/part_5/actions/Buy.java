@@ -1,10 +1,13 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.actions;
 
-public class Buy extends Action{
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.coffee.Coffee;
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.CoffeeMachine;
+
+public class Buy extends Action {
 
     private Coffee coffee;
 
-    Buy(CoffeeMachine curCoffeeMachine, Coffee coffee) {
+    public Buy(CoffeeMachine curCoffeeMachine, Coffee coffee) {
         super(System.in, System.out, curCoffeeMachine);
         this.coffee = coffee;
     }

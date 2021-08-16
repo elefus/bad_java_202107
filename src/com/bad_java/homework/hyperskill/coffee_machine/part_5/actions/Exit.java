@@ -1,6 +1,9 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.actions;
 
-public class Exit extends Action{
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.CoffeeMachine;
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.actions.Action;
+
+public class Exit extends Action {
 
     public Exit(CoffeeMachine curMachine) {
         super(System.in, System.out, curMachine);

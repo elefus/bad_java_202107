@@ -1,8 +1,11 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.actions;
+
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.CoffeeMachine;
+import com.bad_java.homework.hyperskill.coffee_machine.part_5.actions.Action;
 
 public class Fill extends Action {
 
-    Fill(CoffeeMachine curCoffeeMachine) {
+    public Fill(CoffeeMachine curCoffeeMachine) {
         super(System.in, System.out, curCoffeeMachine);
     }
 

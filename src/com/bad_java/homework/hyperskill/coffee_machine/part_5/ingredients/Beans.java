@@ -1,14 +1,13 @@
-package com.bad_java.homework.hyperskill.coffee_machine.part_5;
+package com.bad_java.homework.hyperskill.coffee_machine.part_5.ingredients;
 
-public class Cups implements Ingredient{
+public class Beans implements Ingredient {
 
     private int amount;
-    private final String unit = "cups";
+    private final String unit = "g";
 
-    Cups(int amount) {
+    Beans(int amount) {
         this.amount = amount;
     }
-
     public int getAmount() {
         return amount;
     }
@@ -24,5 +23,4 @@ public class Cups implements Ingredient{
     public void addAmount(int amount) {
         this.amount += amount;
     }
-
 }
