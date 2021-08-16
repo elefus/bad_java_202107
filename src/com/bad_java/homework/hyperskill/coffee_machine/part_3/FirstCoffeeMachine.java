@@ -77,24 +77,25 @@ public class FirstCoffeeMachine extends CoffeeMachine{
     private int getNumberOfPortions() {
         return inputFromConsole.nextInt();
     }
+
+    enum Ingredients {
+        MILK(50),
+        WATER(200),
+        BEANS(15);
+
+        private final int amountPerCup;
+
+        Ingredients(int amountPerCup) {
+            this.amountPerCup = amountPerCup;
+        }
+
+        public int getAmountPerCup() {
+            return amountPerCup;
+        }
+
+        public int countAllAmount (int numberOfCup) {
+            return getAmountPerCup() * numberOfCup;
+        }
+    }
 }
 
-enum Ingredients {
-    MILK(50),
-    WATER(200),
-    BEANS(15);
-
-    private final int amountPerCup;
-
-    Ingredients(int amountPerCup) {
-        this.amountPerCup = amountPerCup;
-    }
-
-    public int getAmountPerCup() {
-        return amountPerCup;
-    }
-
-    public int countAllAmount (int numberOfCup) {
-        return getAmountPerCup() * numberOfCup;
-    }
-}

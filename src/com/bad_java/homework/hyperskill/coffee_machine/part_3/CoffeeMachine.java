@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public abstract class CoffeeMachine {
 
+    // make terminal class
     protected final Scanner inputFromConsole;
 
     private int amountOfMilk;
