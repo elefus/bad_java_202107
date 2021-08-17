@@ -1,7 +1,8 @@
-package com.bad_java.lectures._03.library.repository;
+package com.bad_java.lectures._03.library.repository.memory;
 
 import com.bad_java.lectures._03.DynamicArray;
 import com.bad_java.lectures._03.library.domain.User;
+import com.bad_java.lectures._03.library.repository.UserRepository;
 
 public class InMemoryUserRepository implements UserRepository {
 
