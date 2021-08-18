@@ -6,6 +6,7 @@ import java.util.Scanner;
  * @author Kirill Mololkin kir.mololkin@yandex.ru 06.08.2021
  */
 public class ChattyBot {
+  
 	private final String name;
 	private final int birthYear;
 	private final Scanner scanner;
@@ -15,6 +16,7 @@ public class ChattyBot {
 		this.birthYear = birthYear;
 		this.scanner = scanner;
 	}
+
 
 	public ChattyBot(String name, int birthYear) {
 		this(name, birthYear, new Scanner(System.in));
