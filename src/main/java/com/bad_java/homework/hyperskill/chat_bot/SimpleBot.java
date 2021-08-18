@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.chat_bot.part_1;
+package com.bad_java.homework.hyperskill.chat_bot;
 
 import java.util.Scanner;
 
@@ -40,7 +40,7 @@ public class SimpleBot {
         System.out.println("Now I will prove to you that I can count to any number you want.");
         int num = scanner.nextInt();
         for (int i = 0; i <= num; i++) {
-            System.out.printf("%d!\n", i);
+            System.out.printf("%d!%n", i);
         }
     }
 
