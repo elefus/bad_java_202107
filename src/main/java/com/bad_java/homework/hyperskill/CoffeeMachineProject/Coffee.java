@@ -1,6 +1,6 @@
 package com.bad_java.homework.hyperskill.CoffeeMachineProject;
 
-public abstract class Coffee {
+public abstract class Coffee {//поставить аннотацию @Data из ломбока, разобраться, почему не ставится
 
     private int waterAmount;
     private int milkAmount;

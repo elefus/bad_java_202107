@@ -9,34 +9,42 @@ public class ControlPanel {
     private static int totalCoffeeBeansAmount = 120;
     private static int totalCupsAmount = 9;
     private static int totalMoneyAmount = 550;
+    static State currentState;
 
+
+    public static void getCurrentState(String input) {
+        for (State state : State.values()) {
+            if (state.getOperation().equals(input)) {
+                currentState = state;
+            }
+        }
+    }
 
     public static void choiceOfOperation() {
-        System.out.println("Write action (buy, fill, take, remaining, exit):");
-        String operation = scanner.next();
-        switch (operation) {
-            case "buy":
-                choiceOfCoffee();
-                break;
-            case "fill":
-                addSupply();
-                break;
-            case "take":
-                takeMoney();
-                break;
-            case "remaining":
-                showCurrentSupply();
-                choiceOfOperation();
-                break;
-            case "exit":
-                break;
-        }
+        do {
+            System.out.println("Write action (buy, fill, take, remaining, exit):");
+            getCurrentState(scanner.next());
+            switch (currentState) {
+                case BUY:
+                    choiceOfCoffee();
+                    break;
+                case ADDING_SUPPLY:
+                    addSupply();
+                    break;
+                case TAKING_MONEY:
+                    takeMoney();
+                    break;
+                case REVISION_OF_REMAINING:
+                    showCurrentSupply();
+                    choiceOfOperation();
+                    break;
+            }
+        } while (currentState != State.EXIT);
     }
 
     private static void takeMoney() {
         System.out.printf("I gave you $%d%n", totalMoneyAmount);
         totalMoneyAmount = 0;
-        choiceOfOperation();
     }
 
     private static void addSupply() {
@@ -53,7 +61,6 @@ public class ControlPanel {
         totalMilkAmount += addedMilk;
         totalCoffeeBeansAmount += addedCoffeeBeans;
         totalCupsAmount += addedCups;
-        choiceOfOperation();
     }
 
     private static void choiceOfCoffee() {
@@ -63,6 +70,7 @@ public class ControlPanel {
         String operation = scanner.next();
 
         if (operation.equals("back")) {
+            choiceOfOperation();
         } else if (Integer.valueOf(operation) == 1) {
             coffee = new Espresso();
         } else if (Integer.valueOf(operation) == 2) {
@@ -89,7 +97,6 @@ public class ControlPanel {
                 System.out.println("I have enough resources, making you a coffee!");
             }
         }
-        choiceOfOperation();
     }
 
     private static void showCurrentSupply() {
