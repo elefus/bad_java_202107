@@ -1,5 +1,3 @@
-package com.bad_java.homework.hyperskill.chat_bot.part_5;
-
 public class Bot {
 
     public static void main(String[] args) {

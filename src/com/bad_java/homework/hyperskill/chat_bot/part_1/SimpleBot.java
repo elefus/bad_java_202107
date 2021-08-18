@@ -1,5 +1,3 @@
-package com.bad_java.homework.hyperskill.chat_bot.part_1;
-
 import java.util.Scanner;
 
 public class SimpleBot {

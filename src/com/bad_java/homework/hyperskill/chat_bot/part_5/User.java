@@ -1,5 +1,3 @@
-package com.bad_java.homework.hyperskill.chat_bot.part_5;
-
 public class User {
     private String userName;
     private int age;

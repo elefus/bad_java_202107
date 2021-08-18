@@ -4,6 +4,7 @@ import com.bad_java.homework.hyperskill.coffee_machine.part_5.actions.Action;
 
 public class CoffeeShop {
     public static void main(String[] args) {
+        // проктдывать терминал
         CoffeeMachine myMachine = new FirstCoffeeMachine();
         //myMachine.actionSequence();
         //myMachine.countingIngredients();
