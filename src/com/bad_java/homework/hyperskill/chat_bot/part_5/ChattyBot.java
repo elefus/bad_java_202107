@@ -6,20 +6,20 @@ import java.util.Scanner;
  * @author Kirill Mololkin kir.mololkin@yandex.ru 06.08.2021
  */
 public class ChattyBot {
+  
 	private final String name;
 	private final int birthYear;
 	private final Scanner scanner;
-
-	public ChattyBot(String name, int birthYear) {
-		this.name = name;
-		this.birthYear = birthYear;
-		scanner = new Scanner(System.in);
-	}
 
 	public ChattyBot(String name, int birthYear, Scanner scanner) {
 		this.name = name;
 		this.birthYear = birthYear;
 		this.scanner = scanner;
+	}
+
+
+	public ChattyBot(String name, int birthYear) {
+		this(name, birthYear, new Scanner(System.in));
 	}
 
 	public String getName() {
@@ -58,7 +58,7 @@ public class ChattyBot {
 		System.out.println("Now I will prove to you that I can count to any number you want.");
 		int num = scanner.nextInt();
 		for (int i = 0; i <= num; i++) {
-			System.out.printf("%d!\n", i);
+			System.out.printf("%d!%n", i);
 		}
 	}
 
