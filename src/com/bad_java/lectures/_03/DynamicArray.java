@@ -69,6 +69,15 @@ public class DynamicArray implements Iterable {
     }
   }
 
+  public void remove(Object object) {
+    for (int i = 0; i < size; i++) {
+      if (values[i].equals(object)) {
+        remove(i);
+        return;
+      }
+    }
+  }
+
   public boolean contains(Object value) {
     for (Object val : values) {
       if (val.equals(value)) {
