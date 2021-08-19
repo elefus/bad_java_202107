@@ -1,7 +1,5 @@
 package com.bad_java.homework.hyperskill.CoffeeMachineProject;
 
-import static com.bad_java.homework.hyperskill.CoffeeMachineProject.CoffeeMachine.scanner;
-
 public class ControlPanel {
 
     private static int totalWaterAmount = 400;
@@ -9,32 +7,62 @@ public class ControlPanel {
     private static int totalCoffeeBeansAmount = 120;
     private static int totalCupsAmount = 9;
     private static int totalMoneyAmount = 550;
+    public static State currentState = State.AWAITING_FOR_COMMAND;
 
 
-    public static String getUserInput(String input) {
-        return input;
+    public static void getUserInput(String input) {
+        switch (currentState) {
+            case AWAITING_FOR_COMMAND:
+                choiceOfOperation(input);
+                break;
+            case EXIT:
+                break;
+            case CHOOSING_COFFEE:
+                choiceOfCoffee(input);
+                break;
+            case ADDING_WATER:
+                addWater(input);
+                System.out.println("Write how many ml of milk you want to add:");
+                break;
+            case ADDING_MILK:
+                addMilk(input);
+                System.out.println("Write how many grams of coffee beans you want to add:");
+                break;
+            case ADDING_COFFEE_BEANS:
+                addCoffeeBeans(input);
+                System.out.println("Write how many disposable cups of coffee you want to add:");
+                break;
+            case ADDING_CUPS:
+                addCups(input);
+        }
+        if (currentState == State.AWAITING_FOR_COMMAND) {
+            System.out.println("Write action (buy, fill, take, remaining, exit):");
+        }
     }
 
-    public static void choiceOfOperation() {
-        String input;
-        do {
-            System.out.println("Write action (buy, fill, take, remaining, exit):");
-            input = getUserInput(scanner.next());
-            switch (input) {
-                case "buy":
-                    choiceOfCoffee();
-                    break;
-                case "fill":
-                    addSupply();
-                    break;
-                case "take":
-                    takeMoney();
-                    break;
-                case "remaining":
-                    showCurrentSupply();
-                    break;
-            }
-        } while (!input.equals("exit"));
+    public static void choiceOfOperation(String input) {
+        switch (input) {
+            case "buy":
+                currentState = State.CHOOSING_COFFEE;
+                System.out.println("What do you want to buy? 1 - espresso, " +
+                    "2 - latte, 3 - cappuccino, back - to main menu:");
+                break;
+            case "fill":
+                currentState = State.ADDING_WATER;
+                System.out.println("Write how many ml of water you want to add: ");
+                break;
+            case "take":
+                takeMoney();
+                currentState = State.AWAITING_FOR_COMMAND;
+                break;
+            case "remaining":
+                showCurrentSupply();
+                currentState = State.AWAITING_FOR_COMMAND;
+                break;
+            case "exit":
+                currentState = State.EXIT;
+                break;
+        }
     }
 
     private static void takeMoney() {
@@ -42,32 +70,43 @@ public class ControlPanel {
         totalMoneyAmount = 0;
     }
 
-    private static void addSupply() {
-        System.out.println("Write how many ml of water you want to add:");
-        totalWaterAmount += Integer.parseInt(getUserInput(scanner.next()));
-        System.out.println("Write how many ml of milk you want to add:");
-        totalMilkAmount += Integer.parseInt(getUserInput(scanner.next()));
-        System.out.println("Write how many grams of coffee beans you want to add:");
-        totalCoffeeBeansAmount += Integer.parseInt(getUserInput(scanner.next()));
-        System.out.println("Write how many disposable cups of coffee you want to add:");
-        totalCupsAmount += Integer.parseInt(getUserInput(scanner.next()));
+    private static void addWater(String input) {
+        currentState = State.ADDING_MILK;
+        totalWaterAmount += Integer.parseInt(input);
     }
 
-    private static void choiceOfCoffee() {
+    private static void addMilk(String input) {
+        currentState = State.ADDING_COFFEE_BEANS;
+        totalMilkAmount += Integer.parseInt(input);
+    }
+
+    private static void addCoffeeBeans(String input) {
+        currentState = State.ADDING_CUPS;
+        totalCoffeeBeansAmount += Integer.parseInt(input);
+    }
+
+    private static void addCups(String input) {
+        currentState = State.AWAITING_FOR_COMMAND;
+        totalCupsAmount += Integer.parseInt(input);
+    }
+
+    private static void choiceOfCoffee(String variant) {
         Coffee coffee = null;
-        System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino,"
-            + " back - to main menu:");
-        switch (getUserInput(scanner.next())) {
+        switch (variant) {
             case "back":
-                return;
+                currentState = State.AWAITING_FOR_COMMAND;
+                break;
             case "1":
                 coffee = new Espresso();
+                currentState = State.AWAITING_FOR_COMMAND;
                 break;
             case "2":
                 coffee = new Latte();
+                currentState = State.AWAITING_FOR_COMMAND;
                 break;
             case "3":
                 coffee = new Cappuccino();
+                currentState = State.AWAITING_FOR_COMMAND;
                 break;
         }
 

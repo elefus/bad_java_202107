@@ -1,8 +1,12 @@
 package com.bad_java.homework.hyperskill.CoffeeMachineProject;
 
-import java.util.Scanner;
+import static com.bad_java.homework.hyperskill.CoffeeMachineProject.ControlPanel.currentState;
+import static com.bad_java.homework.hyperskill.CoffeeMachineProject.Ingredients.COFFEE_BEANS;
+import static com.bad_java.homework.hyperskill.CoffeeMachineProject.Ingredients.MILK;
+import static com.bad_java.homework.hyperskill.CoffeeMachineProject.Ingredients.WATER;
+import static com.bad_java.homework.hyperskill.CoffeeMachineProject.State.EXIT;
 
-import static com.bad_java.homework.hyperskill.CoffeeMachineProject.Ingredients.*;
+import java.util.Scanner;
 
 public class CoffeeMachine {
 
@@ -12,7 +16,12 @@ public class CoffeeMachine {
         //Operation.getAllOperations();
         //findNeededAmountOfIngredients();
         //findAvailableAmountOfCoffee();
-        ControlPanel.choiceOfOperation();
+        System.out.println("Write action (buy, fill, take, remaining, exit):");
+        do {
+            String input = scanner.next();
+            ControlPanel.getUserInput(input);
+        } while (currentState != EXIT);
+
     }
 
     static void findNeededAmountOfIngredients() {
