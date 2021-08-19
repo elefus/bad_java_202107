@@ -36,7 +36,6 @@ public class ControlPanel {
                     break;
                 case REVISION_OF_REMAINING:
                     showCurrentSupply();
-                    choiceOfOperation();
                     break;
             }
         } while (currentState != State.EXIT);
