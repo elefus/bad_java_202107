@@ -69,14 +69,18 @@ public class ControlPanel {
             + " back - to main menu:");
         String operation = scanner.next();
 
-        if (operation.equals("back")) {
-            choiceOfOperation();
-        } else if (Integer.valueOf(operation) == 1) {
-            coffee = new Espresso();
-        } else if (Integer.valueOf(operation) == 2) {
-            coffee = new Latte();
-        } else if (Integer.valueOf(operation) == 3) {
-            coffee = new Cappuccino();
+        switch (operation) {
+            case "back":
+                return;
+            case "1":
+                coffee = new Espresso();
+                break;
+            case "2":
+                coffee = new Latte();
+                break;
+            case "3":
+                coffee = new Cappuccino();
+                break;
         }
 
         if (coffee != null) {
