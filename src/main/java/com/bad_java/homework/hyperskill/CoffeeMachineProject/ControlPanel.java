@@ -9,36 +9,32 @@ public class ControlPanel {
     private static int totalCoffeeBeansAmount = 120;
     private static int totalCupsAmount = 9;
     private static int totalMoneyAmount = 550;
-    static State currentState;
 
 
-    public static void getCurrentState(String input) {
-        for (State state : State.values()) {
-            if (state.getOperation().equals(input)) {
-                currentState = state;
-            }
-        }
+    public static String getUserInput(String input) {
+        return input;
     }
 
     public static void choiceOfOperation() {
+        String input;
         do {
             System.out.println("Write action (buy, fill, take, remaining, exit):");
-            getCurrentState(scanner.next());
-            switch (currentState) {
-                case BUY:
+            input = getUserInput(scanner.next());
+            switch (input) {
+                case "buy":
                     choiceOfCoffee();
                     break;
-                case ADDING_SUPPLY:
+                case "fill":
                     addSupply();
                     break;
-                case TAKING_MONEY:
+                case "take":
                     takeMoney();
                     break;
-                case REVISION_OF_REMAINING:
+                case "remaining":
                     showCurrentSupply();
                     break;
             }
-        } while (currentState != State.EXIT);
+        } while (!input.equals("exit"));
     }
 
     private static void takeMoney() {
@@ -48,27 +44,20 @@ public class ControlPanel {
 
     private static void addSupply() {
         System.out.println("Write how many ml of water you want to add:");
-        int addedWater = scanner.nextInt();
+        totalWaterAmount += Integer.parseInt(getUserInput(scanner.next()));
         System.out.println("Write how many ml of milk you want to add:");
-        int addedMilk = scanner.nextInt();
+        totalMilkAmount += Integer.parseInt(getUserInput(scanner.next()));
         System.out.println("Write how many grams of coffee beans you want to add:");
-        int addedCoffeeBeans = scanner.nextInt();
+        totalCoffeeBeansAmount += Integer.parseInt(getUserInput(scanner.next()));
         System.out.println("Write how many disposable cups of coffee you want to add:");
-        int addedCups = scanner.nextInt();
-
-        totalWaterAmount += addedWater;
-        totalMilkAmount += addedMilk;
-        totalCoffeeBeansAmount += addedCoffeeBeans;
-        totalCupsAmount += addedCups;
+        totalCupsAmount += Integer.parseInt(getUserInput(scanner.next()));
     }
 
     private static void choiceOfCoffee() {
         Coffee coffee = null;
         System.out.println("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino,"
             + " back - to main menu:");
-        String operation = scanner.next();
-
-        switch (operation) {
+        switch (getUserInput(scanner.next())) {
             case "back":
                 return;
             case "1":
