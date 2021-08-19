@@ -1,0 +1,11 @@
+@startuml
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+BaseClass <|-- ChildClass
+Interface <|.- ImplementationClass
+
+hide empty members
+
+@enduml
