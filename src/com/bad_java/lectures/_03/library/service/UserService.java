@@ -4,12 +4,14 @@ import com.bad_java.lectures._03.DynamicArray;
 import com.bad_java.lectures._03.library.domain.User;
 import com.bad_java.lectures._03.library.domain.User.Type;
 import com.bad_java.lectures._03.library.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public User authenticate(String username, String password) {
         User user = repository.findByUsername(username);
