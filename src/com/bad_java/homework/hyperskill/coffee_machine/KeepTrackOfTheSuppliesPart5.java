@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 import static java.lang.Math.min;
 
-public class Keep_Track_Of_The_Supplies_Part_5 {
+public class KeepTrackOfTheSuppliesPart5 {
     final static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        MakingCoffee();
-        IngredientCalculator();
-        EstimateTheNumberOfServings();
-        BuyFillTake();
+        makingCoffee();
+        ingredientCalculator();
+        estimateTheNumberOfServings();
+        buyFillTake();
     }
 
-    public static void MakingCoffee() {
+    public static void makingCoffee() {
         System.out.println("Starting to make a coffee");
         System.out.println("Grinding coffee beans");
         System.out.println("Boiling water");
@@ -24,7 +24,7 @@ public class Keep_Track_Of_The_Supplies_Part_5 {
         System.out.println("Coffee is ready!");
     }
 
-    public static void IngredientCalculator() {
+    public static void ingredientCalculator() {
         System.out.println("Write how many cups of coffee you will need:");
         int number_coffee = scanner.nextInt();
         System.out.println("For " + number_coffee + " cups of coffee you will need:");
@@ -36,7 +36,7 @@ public class Keep_Track_Of_The_Supplies_Part_5 {
         System.out.println(coffee_beans + " g of coffee beans");
     }
 
-    public static void EstimateTheNumberOfServings() {
+    public static void estimateTheNumberOfServings() {
         System.out.println("Write how many ml of water the coffee machine has:");
         int water_machine = scanner.nextInt();
         System.out.println("Write how many ml of milk the coffee machine has:");
@@ -62,7 +62,7 @@ public class Keep_Track_Of_The_Supplies_Part_5 {
         }
     }
 
-    public static void BuyFillTake(){
+    public static void buyFillTake(){
         int water_machine = 400;
         int milk_machine = 540;
         int beans_machine = 120;
@@ -70,8 +70,7 @@ public class Keep_Track_Of_The_Supplies_Part_5 {
         int money_machine = 550;
         int [] arr_machine = {water_machine, milk_machine, beans_machine, cups_machine, money_machine};
 
-        boolean cheaker = true;
-        while(cheaker){
+        while(true){
             System.out.println("Write action (buy, fill, take, remaining, exit):");
             String action = scanner.next();
             switch (action){
@@ -114,8 +113,7 @@ public class Keep_Track_Of_The_Supplies_Part_5 {
                     break;
 
                 case "exit":
-                    cheaker = false;
-                    break;
+                    return;
 
                 default:
                     System.out.println("Error!");
