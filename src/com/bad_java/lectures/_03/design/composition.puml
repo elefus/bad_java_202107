@@ -3,7 +3,13 @@
 ' avoid problems with angled crows feet
 skinparam linetype ortho
 
-Base1 *-- Child1
+interface BookRepository
+interface BookTicketRepository
+BookRepository <|.- InMemoryBookRepository
+BookTicketRepository <|.- InMemoryBookTicketRepository
+
+LibraryService *-- InMemoryBookRepository
+LibraryService *-- InMemoryBookTicketRepository
 
 hide empty members
 
