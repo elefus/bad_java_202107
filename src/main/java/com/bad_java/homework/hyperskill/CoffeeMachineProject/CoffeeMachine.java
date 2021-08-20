@@ -21,7 +21,6 @@ public class CoffeeMachine {
             String input = scanner.next();
             ControlPanel.getUserInput(input);
         } while (currentState != EXIT);
-
     }
 
     static void findNeededAmountOfIngredients() {
