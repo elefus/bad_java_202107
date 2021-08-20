@@ -1,6 +1,6 @@
 package com.bad_java.homework.hyperskill.coffeeMachine.part_5_OOP.machine;
 
-abstract public class Coffee {
+public abstract class Coffee {
 
   int amountOfWater;
   int amountOfMilk;
