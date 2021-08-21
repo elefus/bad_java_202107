@@ -1,8 +1,7 @@
 package com.bad_java.lectures._04;
 
-import lombok.extern.slf4j.Slf4j;
+import lombok.SneakyThrows;
 
-import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -12,6 +11,13 @@ public class ExceptionsExample {
         System.out.println("main::enter");
         noThrowsMethod();
         System.out.println("main::exit");
+
+        RuntimeException runtimeException = new RuntimeException();
+        System.out.println("line between");
+        throw runtimeException;
+
+//        throwsUnchecked(new Exception());
+//        sneaky();
     }
 
     public static void multiCatch() {
@@ -66,5 +72,14 @@ public class ExceptionsExample {
             throw new IllegalArgumentException("username");
         }
 //        System.out.println("method::exit");
+    }
+
+    @SneakyThrows
+    public static void sneaky() {
+        throw new Exception();
+    }
+
+    public static <T extends Exception> void throwsUnchecked(Throwable toThrow) throws T {
+        throw (T) toThrow;
     }
 }
