@@ -8,15 +8,15 @@ public class TicTacToeGrid {
     private static int xAmount = 0;
     private static int OAmount = 0;
 
-    static void showGameGridSample() {
-        System.out.println(("---------"));
-        System.out.println("| " + 'X' + " " + 'O' + " " + 'X' + " |");
-        System.out.println("| " + 'O' + " " + 'X' + " " + 'O' + " |");
-        System.out.println("| " + 'X' + " " + 'X' + " " + 'O' + " |");
-        System.out.println("---------");
+    static void showGameGridSample(Terminal terminal) {
+        terminal.println(("---------"));
+        terminal.println("| " + 'X' + " " + 'O' + " " + 'X' + " |");
+        terminal.println("| " + 'O' + " " + 'X' + " " + 'O' + " |");
+        terminal.println("| " + 'X' + " " + 'X' + " " + 'O' + " |");
+        terminal.println("---------");
     }
 
-    static void showCurrentGameStage(String input) {
+    static void showCurrentGameStage(String input, Terminal terminal) {
         int i = 0;
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
@@ -24,20 +24,20 @@ public class TicTacToeGrid {
                 i++;
             }
         }
-        System.out.println("---------");
-        System.out.println(
+        terminal.println("---------");
+        terminal.println(
             "| " + grid[0][0] + " " + grid[0][1] + " " + grid[0][2] + " |");
-        System.out.println(
+        terminal.println(
             "| " + grid[1][0] + " " + grid[1][1] + " " + grid[1][2] + " |");
-        System.out.println(
+        terminal.println(
             "| " + grid[2][0] + " " + grid[2][1] + " " + grid[2][2] + " |");
-        System.out.println("---------");
+        terminal.println("---------");
     }
 
-    static void showGameResult(String input) {
+    static void showGameResult(String input, Terminal terminal) {
         countXandO(input);
-        showCurrentGameStage(input);
-        getGameResult(grid);
+        showCurrentGameStage(input, terminal);
+        getGameResult(grid, terminal);
     }
 
     private static void countXandO(String input) {
@@ -52,33 +52,23 @@ public class TicTacToeGrid {
         }
     }
 
-    //row
-    static void getGameResult(char[][] grid) {
+    //row and column
+    static void getGameResult(char[][] grid, Terminal terminal) {
         char winner = ' ';
+        char tempWinner = ' ';
         boolean impossible = false;
         for (int i = 0; i < 3; i++) {
             if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][0] != '_') {
-                char tempWinner = grid[i][0];
-                if (winner != ' ' && tempWinner != winner) {
-                    System.out.println(IMPOSSIBLE.getMessage());
-                    impossible = true;
-                    break;
-                } else {
-                    winner = tempWinner;
-                }
+                tempWinner = grid[i][0];
+            } else if (grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i] && grid[0][i] != '_') {
+                tempWinner = grid[0][i];
             }
-        }
-        //column
-        for (int i = 0; i < 3; i++) {
-            if (grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i] && grid[0][i] != '_') {
-                char tempWinner = grid[0][i];
-                if (winner != ' ' && tempWinner != winner) {
-                    System.out.println(IMPOSSIBLE.getMessage());
-                    impossible = true;
-                    break;
-                } else {
-                    winner = tempWinner;
-                }
+            if (winner != ' ' && tempWinner != winner) {
+                terminal.println(IMPOSSIBLE.getMessage());
+                impossible = true;
+                break;
+            } else {
+                winner = tempWinner;
             }
         }
         //1st diagonal
@@ -91,13 +81,13 @@ public class TicTacToeGrid {
         }
         if (Math.abs(xAmount - OAmount) >= 2) {
             impossible = true;
-            System.out.println(IMPOSSIBLE.getMessage());
+            terminal.println(IMPOSSIBLE.getMessage());
         } else if (winner == ' ' && xAmount + OAmount < 9) {
-            System.out.println(ONGOING_GAME.getMessage());
+            terminal.println(ONGOING_GAME.getMessage());
         } else if (winner == ' ' && xAmount + OAmount == 9) {
-            System.out.println(DRAW.getMessage());
+            terminal.println(DRAW.getMessage());
         } else if (winner != ' ' && !impossible) {
-            System.out.println(winner + WIN.getMessage());
+            terminal.println(winner + WIN.getMessage());
         }
     }
 }
