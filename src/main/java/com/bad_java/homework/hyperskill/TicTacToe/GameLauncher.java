@@ -6,7 +6,8 @@ public class GameLauncher {
         Terminal terminal = new Terminal(System.in, System.out);
 
         //TicTacToeGrid.showGameGridSample(terminal);
-        //TicTacToeGrid.showCurrentGameStage(terminal.readLine(), terminal);
-        TicTacToeGrid.showGameResult(terminal.readLine(), terminal);
+        TicTacToeGrid.showStartGameGrid(terminal.readLine(), terminal);
+        TicTacToeGrid.makeAMove(terminal);
+        //TicTacToeGrid.showGameResult(terminal.readLine(), terminal);
     }
 }

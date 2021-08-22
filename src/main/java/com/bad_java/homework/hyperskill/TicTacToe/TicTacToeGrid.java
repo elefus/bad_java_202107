@@ -16,7 +16,7 @@ public class TicTacToeGrid {
         terminal.println("---------");
     }
 
-    static void showCurrentGameStage(String input, Terminal terminal) {
+    static void showStartGameGrid(String input, Terminal terminal) {
         int i = 0;
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
@@ -24,6 +24,11 @@ public class TicTacToeGrid {
                 i++;
             }
         }
+        showCurrentGameGrid(terminal);
+    }
+
+    static void showCurrentGameGrid(Terminal terminal) {
+
         terminal.println("---------");
         terminal.println(
             "| " + grid[0][0] + " " + grid[0][1] + " " + grid[0][2] + " |");
@@ -35,9 +40,9 @@ public class TicTacToeGrid {
     }
 
     static void showGameResult(String input, Terminal terminal) {
-        countXandO(input);
-        showCurrentGameStage(input, terminal);
-        getGameResult(grid, terminal);
+        //countXandO(input);
+        //showCurrentGameStage(input, terminal);
+        //getGameResult(grid, terminal);
     }
 
     private static void countXandO(String input) {
@@ -52,11 +57,41 @@ public class TicTacToeGrid {
         }
     }
 
-    //row and column
+    static void makeAMove(Terminal terminal) {
+        while (true) {
+            terminal.println("Enter the coordinates: ");
+            String move = terminal.readLine();
+            String[] coordinates = move.split(" ");
+            int column = 0;
+            int row = 0;
+            boolean isCoordinatesNumbers = true;
+            if (coordinates.length == 2 && coordinates[0].matches("\\d+") && coordinates[1].matches(
+                "\\d+")) {
+                column = Integer.parseInt(coordinates[0]);
+                row = Integer.parseInt(coordinates[1]);
+            } else {
+                isCoordinatesNumbers = false;
+                terminal.println("You should enter numbers!");
+            }
+            if (isCoordinatesNumbers) {
+                if (column < 1 || column > 3 || row < 1 || row > 3) {
+                    terminal.println("Coordinates should be from 1 to 3!");
+                } else if (grid[column - 1][row - 1] != '_') {
+                    terminal.println("This cell is occupied! Choose another one!");
+                } else {
+                    grid[column - 1][row - 1] = 'X';
+                    showCurrentGameGrid(terminal);
+                    break;
+                }
+            }
+        }
+    }
+
     static void getGameResult(char[][] grid, Terminal terminal) {
         char winner = ' ';
         char tempWinner = ' ';
         boolean impossible = false;
+        //row and column
         for (int i = 0; i < 3; i++) {
             if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][0] != '_') {
                 tempWinner = grid[i][0];
