@@ -1,0 +1,38 @@
+@startuml
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Book" as Book {
+    id: long
+    --
+    isbn: String
+    title: String
+    author: String
+    year: int
+    price: double
+    count: int
+}
+
+entity "BookTicket" as BookTicket {
+    id: long
+    --
+    book: Book
+    user: User
+    takenTimestamp: long
+}
+
+entity "User" as User {
+    id: long
+    --
+    username: String
+    password: String
+    type: User.Type
+}
+
+Book ||-o{ BookTicket
+BookTicket }o-|| User
+@enduml
