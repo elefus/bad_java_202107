@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.TicTacToe;
+package com.bad_java.homework.hyperskill.TicTacToe.FourPartsOfTheTask;
 
 public class GameLauncher {
 

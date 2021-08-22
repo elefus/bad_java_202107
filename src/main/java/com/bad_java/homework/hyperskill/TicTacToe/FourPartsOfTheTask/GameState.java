@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.TicTacToe;
+package com.bad_java.homework.hyperskill.TicTacToe.FourPartsOfTheTask;
 
 public enum GameState {
     ONGOING_GAME("Game not finished"),

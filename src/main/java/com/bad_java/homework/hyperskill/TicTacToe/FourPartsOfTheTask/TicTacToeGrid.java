@@ -1,6 +1,9 @@
-package com.bad_java.homework.hyperskill.TicTacToe;
+package com.bad_java.homework.hyperskill.TicTacToe.FourPartsOfTheTask;
 
-import static com.bad_java.homework.hyperskill.TicTacToe.GameState.*;
+import static com.bad_java.homework.hyperskill.TicTacToe.FourPartsOfTheTask.GameState.DRAW;
+import static com.bad_java.homework.hyperskill.TicTacToe.FourPartsOfTheTask.GameState.IMPOSSIBLE;
+import static com.bad_java.homework.hyperskill.TicTacToe.FourPartsOfTheTask.GameState.ONGOING_GAME;
+import static com.bad_java.homework.hyperskill.TicTacToe.FourPartsOfTheTask.GameState.WIN;
 
 public class TicTacToeGrid {
 
@@ -8,7 +11,8 @@ public class TicTacToeGrid {
     private static int xAmount = 0;
     private static int OAmount = 0;
 
-    static void showGameGridSample(Terminal terminal) {
+    static void showGameGridSample(
+        Terminal terminal) {
         terminal.println(("---------"));
         terminal.println("| " + 'X' + " " + 'O' + " " + 'X' + " |");
         terminal.println("| " + 'O' + " " + 'X' + " " + 'O' + " |");
@@ -27,7 +31,8 @@ public class TicTacToeGrid {
         showCurrentGameGrid(terminal);
     }
 
-    static void showCurrentGameGrid(Terminal terminal) {
+    static void showCurrentGameGrid(
+        Terminal terminal) {
 
         terminal.println("---------");
         terminal.println(
@@ -58,7 +63,7 @@ public class TicTacToeGrid {
     }
 
     static void makeAMove(Terminal terminal) {
-        while (true) {
+        do {
             terminal.println("Enter the coordinates: ");
             String move = terminal.readLine();
             String[] coordinates = move.split(" ");
@@ -81,10 +86,9 @@ public class TicTacToeGrid {
                 } else {
                     grid[column - 1][row - 1] = 'X';
                     showCurrentGameGrid(terminal);
-                    break;
                 }
             }
-        }
+        } while (true);
     }
 
     static void getGameResult(char[][] grid, Terminal terminal) {
