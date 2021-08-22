@@ -31,7 +31,6 @@ public class CoffeeMachine {
         System.out.println(cups * MILK.getAmountForOneCup() + " ml of milk");
         System.out.println(cups * COFFEE_BEANS.getAmountForOneCup() + " g of coffee beans");
     }
-
     static void findAvailableAmountOfCoffee() {
         System.out.println("Write how many ml of water the coffee machine has:");
         int availableWater = scanner.nextInt();
