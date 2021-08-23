@@ -1,15 +1,15 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_3;
+package com.bad_java.homework.hyperskill.tictactoe.part_4;
 
 public class Game {
 
     private State state;
     private final Terminal console;
     private Board playBoard;
-    //private char curChar;
+    private char curChar;
 
     public Game(Terminal console) {
         this.console = console;
-        //this.curChar = 'X';
+        this.curChar = 'X';
         this.state = new Start(this);
         playBoard = Board.getInstance(console);
     }
@@ -32,33 +32,37 @@ public class Game {
         }
     }
 
-    /*public void step(){
+    public boolean step(){
+        boolean wasDone = false;
         askForStep();
         int x = this.console.readInt();
         int y = this.console.readInt();
-        if(Board.Node.Coordinate.checkCoordinate(x, y, playBoard.getWidth(), playBoard.getHeight())){
-            this.playBoard.step(x, y, curChar);
-            changeCurChar();
+        if(Board.Node.Coordinate.checkCoordinate(x - 1, y - 1, playBoard.getWidth(), playBoard.getHeight())){
+            wasDone = this.playBoard.step(x - 1, y - 1, curChar);
+            //changeCurChar();
         } else {
             //выбросить исключение
             console.println("Wrong coordinates (step)");
         }
+        return wasDone;
 
-    }*/
+    }
 
-    public void step(int x, int y, char curChar){
+    public boolean step(int x, int y, char curChar){
+        boolean wasDone = false;
         if(Board.Node.Coordinate.checkCoordinate(x, y, playBoard.getWidth(), playBoard.getHeight())){
-            this.playBoard.step(x, y, curChar);
+            wasDone = this.playBoard.step(x, y, curChar);
         } else {
             //выбросить исключение
             console.println("Wrong coordinates (step)");
         }
+        return wasDone;
 
     }
 
     public State checkBoard(){
         char winner = this.playBoard.checkForWin();
-        if (this.playBoard.checkForDivBetweenXO()) {
+        if (!this.playBoard.checkForDivBetweenXO()) {
             switch (winner) {
                 case 'X':
                     return new XWin(this);

@@ -1,9 +1,9 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_6;
+package com.bad_java.homework.hyperskill.tictactoe.part_5;
 
 public class Impossible extends State {
 
     public Impossible(Game game) {
-        super(game);
+        super(game, false);
     }
 
     @Override

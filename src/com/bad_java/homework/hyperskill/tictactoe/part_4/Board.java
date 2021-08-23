@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_3;
+package com.bad_java.homework.hyperskill.tictactoe.part_4;
 
 import java.util.ArrayList;
 
@@ -142,24 +142,28 @@ public class Board {
         }
     }
 
-    public void step(int x, int y, char symbol) {
-        if (Node.Coordinate.checkCoordinate(x, y, this.width, this.height)) {
+    public boolean step(int x, int y, char symbol) {
+        if (Node.Coordinate.checkCoordinate(x, y, this.width, this.height) && !board.get(y * this.width + x).isBusy()) {
             switch (symbol) {
                 case 'X':
                     board.set(y * width + x, new Cross(x, y));
                     countX++;
-                    break;
+                    return true;
                 case 'O':
                     board.set(y * width + x, new Zero(x, y));
                     countO++;
-                    break;
+                    return true;
+                case '_':
+                    return true;
                 default:
                     //выбросить исключение
                     console.println("Wrong char (step)");
+                    return false;
             }
         } else {
             //выбросить исключение
-            console.println("Wrong coordinates (step)");
+            console.println("Wrong coordinates (step) or is oresent");
+            return false;
         }
     }
 
@@ -340,7 +344,7 @@ public class Board {
 
         Empty(int x, int y){
             super(x, y);
-            this.symbol = '_';
+            this.symbol = ' ';
             this.isBusy = false;
         }
 
@@ -351,7 +355,7 @@ public class Board {
 
         @Override
         public char getSymbol() {
-            return '_';
+            return ' ';
         }
 
         public String toString(){

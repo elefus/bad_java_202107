@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_3;
+package com.bad_java.homework.hyperskill.tictactoe.part_4;
 
 import java.io.InputStream;
 import java.io.PrintStream;

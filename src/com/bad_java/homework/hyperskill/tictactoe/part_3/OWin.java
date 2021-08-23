@@ -1,6 +1,6 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_4;
+package com.bad_java.homework.hyperskill.tictactoe.part_3;
 
-public class OWin extends Win{
+public class OWin extends Win {
 
     public OWin(Game game) {
         super(game);

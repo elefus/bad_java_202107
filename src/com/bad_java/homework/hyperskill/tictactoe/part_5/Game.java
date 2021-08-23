@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_6;
+package com.bad_java.homework.hyperskill.tictactoe.part_5;
 
 public class Game {
 
@@ -39,7 +39,7 @@ public class Game {
         int y = this.console.readInt();
         if(Board.Node.Coordinate.checkCoordinate(x - 1, y - 1, playBoard.getWidth(), playBoard.getHeight())){
             wasDone = this.playBoard.step(x - 1, y - 1, curChar);
-            //changeCurChar();
+            changeCurChar();
         } else {
             //выбросить исключение
             console.println("Wrong coordinates (step)");
@@ -62,7 +62,7 @@ public class Game {
 
     public State checkBoard(){
         char winner = this.playBoard.checkForWin();
-        if (this.playBoard.checkForDivBetweenXO()) {
+        if (!this.playBoard.checkForDivBetweenXO()) {
             switch (winner) {
                 case 'X':
                     return new XWin(this);
@@ -93,9 +93,9 @@ public class Game {
         this.playBoard.printBoardWithBoundaries();
     }
 
-    /*private void changeCurChar(){
+    private void changeCurChar(){
         this.curChar = this.curChar == 'X' ? 'O' : 'X';
-    }*/
+    }
 
     public void changeState(State state){
         this.state = state;

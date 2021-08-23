@@ -1,6 +1,6 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_4;
+package com.bad_java.homework.hyperskill.tictactoe.part_3;
 
-public class Start extends State{
+public class Start extends State {
 
     public Start(Game game) {
         super(game);

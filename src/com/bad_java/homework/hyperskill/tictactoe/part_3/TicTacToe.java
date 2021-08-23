@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_4;
+package com.bad_java.homework.hyperskill.tictactoe.part_3;
 
 public class TicTacToe {
     public static void main(String[] args) {
@@ -16,10 +16,11 @@ public class TicTacToe {
             }
         };
         if (check.checkBoardInput(gameBoard)) {
-            for (int i = 0; i < 9; i++) {
+            for (int i = 0; i < gameBoard.length(); i++) {
                 curGame.getState().nextStep(i % 3, i / 3, gameBoard.charAt(i));
             }
             curGame.printBoard();
+            curGame.changeState(curGame.checkBoard());
             System.out.println(curGame.getState().printState());
         }
     }

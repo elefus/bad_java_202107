@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_1;
+package com.bad_java.homework.hyperskill.tictactoe.part_2;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class Board {
      */
 
     private static Board instance;
-    private Terminal console;
+    private final Terminal console;
     private ArrayList<Node> board;
     private final int height;
     private final int width;
@@ -56,6 +56,7 @@ public class Board {
                 isAdded = board.add(new Node(indexX, indexY));
                 if (!isAdded) {
                     // бросить исключение
+                    System.out.println("Can't be added");
                 }
             }
         }
@@ -69,28 +70,54 @@ public class Board {
         boolean isAdded = true;
         CheckInput check = new CheckInput() {
             @Override
-            public boolean checkBoard(String inputBoard) {
+            public boolean checkBoardInput(String inputBoard) {
                 if (inputBoard.length() != height * width) {
+                    // добавить проверку на неподходящие симвоы
                     return false;
                 }
                 return true;
             }
         };
-        for (int indexY = 0; indexY < height; indexY++) {
-            for (int indexX = 0; indexX < width; indexX++) {
-                isAdded = board.add(new Node(indexX, indexY, example.charAt(indexX + indexY * width)));
-                if (!isAdded) {
-                    // бросить исключение
+        if (check.checkBoardInput(example)) {
+            for (int indexY = 0; indexY < height; indexY++) {
+                for (int indexX = 0; indexX < width; indexX++) {
+                    char curChar = example.charAt(indexX + indexY * width);
+                    boolean isBusy = curChar == 'X' || curChar == 'O';
+                    isAdded = board.add(new Node(indexX, indexY, curChar, isBusy));
+                    if (!isAdded) {
+                        // бросить исключение
+                        console.println("Can't be added");
+                    }
                 }
             }
+        } else {
+            console.println("Wrong input!");
         }
+    }
+
+    public void printBoardWithBoundaries() {
+        printDashes();
+        for (int curNode = 1; curNode <= board.size(); curNode++) {
+            if (curNode % width == 1) {
+                console.print("|");
+            }
+            console.print(" " + board.get(curNode - 1).toString());
+            if (curNode % width == 0) {
+                console.print(" |\n");
+            }
+        }
+        printDashes();
+    }
+
+    public void printDashes() {
+        console.println("---------");
     }
 
     public void printBoard() {
         for (int curNode = 1; curNode <= board.size(); curNode++) {
-            System.out.print(board.get(curNode - 1).toString());
+            console.print(board.get(curNode - 1).toString());
             if (curNode % width == 0) {
-                System.out.print('\n');
+                console.print('\n');
             }
         }
     }
@@ -117,11 +144,11 @@ public class Board {
             this.isBusy = false;
         }
 
-        Node(int x, int y, char symbol) {
+        Node(int x, int y, char symbol, boolean isBusy) {
             this.symbol = symbol;
             this.x = x;
             this.y = y;
-            this.isBusy = false;
+            this.isBusy = isBusy;
         }
 
         public void setSymbol(char symbol) {

@@ -1,10 +1,11 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_1;
+package com.bad_java.homework.hyperskill.tictactoe.part_2;
 
 public class TicTacToe {
     public static void main(String[] args) {
         Terminal console = new Terminal();
-        Board playBoard = Board.getInstance(console, "XOXOXOXXO");
-        playBoard.printBoard();
+        String inputBoard = console.readLine();
+        Board playBoard = Board.getInstance(console, inputBoard);
+        playBoard.printBoardWithBoundaries();
     }
 
 }

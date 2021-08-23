@@ -1,6 +1,6 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_4;
+package com.bad_java.homework.hyperskill.tictactoe.part_3;
 
-public class Impossible extends State{
+public class Impossible extends State {
 
     public Impossible(Game game) {
         super(game);

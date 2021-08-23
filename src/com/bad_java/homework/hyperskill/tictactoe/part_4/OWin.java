@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_3;
+package com.bad_java.homework.hyperskill.tictactoe.part_4;
 
 public class OWin extends Win{
 
@@ -7,10 +7,21 @@ public class OWin extends Win{
     }
 
     @Override
-    public void nextStep(int x, int y, char curSymbol) {
+    public boolean nextStep(int x, int y, char curSymbol) {
+        boolean wasDone;
         Game curGame = getGame();
-        curGame.step(x, y, curSymbol);
+        wasDone = curGame.step(x, y, curSymbol);
         curGame.changeState(new OWin(curGame));
+        return wasDone;
+    }
+
+    @Override
+    public boolean nextStep() {
+        boolean wasDone;
+        Game curGame = getGame();
+        wasDone = curGame.step();
+        curGame.changeState(new OWin(curGame));
+        return wasDone;
     }
 
     @Override

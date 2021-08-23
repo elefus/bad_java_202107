@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_3;
+package com.bad_java.homework.hyperskill.tictactoe.part_4;
 
 public class Start extends State{
 
@@ -7,10 +7,20 @@ public class Start extends State{
     }
 
     @Override
-    public void nextStep(int x, int y, char curSimbol) {
+    public boolean nextStep(int x, int y, char curSimbol) {
+        boolean wasDone;
         Game curGame = getGame();
-        curGame.step(x, y, curSimbol);
+        wasDone = curGame.step(x, y, curSimbol);
         curGame.changeState(new NotFinished(curGame));
+        return wasDone;
+    }
+
+    public boolean nextStep() {
+        boolean wasDone;
+        Game curGame = getGame();
+        wasDone = curGame.step();
+        curGame.changeState(new NotFinished(curGame));
+        return wasDone;
     }
 
     @Override

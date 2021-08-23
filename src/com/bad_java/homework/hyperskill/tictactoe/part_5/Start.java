@@ -1,9 +1,9 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_6;
+package com.bad_java.homework.hyperskill.tictactoe.part_5;
 
 public class Start extends State {
 
     public Start(Game game) {
-        super(game);
+        super(game, true);
     }
 
     @Override

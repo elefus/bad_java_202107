@@ -1,7 +1,7 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_1;
+package com.bad_java.homework.hyperskill.tictactoe.part_2;
 
 public interface CheckInput {
 
-    boolean checkBoard(String inputBoard);
+    boolean checkBoardInput(String inputBoard);
 
 }

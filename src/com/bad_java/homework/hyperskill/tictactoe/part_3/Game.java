@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_4;
+package com.bad_java.homework.hyperskill.tictactoe.part_3;
 
 public class Game {
 
@@ -58,7 +58,7 @@ public class Game {
 
     public State checkBoard(){
         char winner = this.playBoard.checkForWin();
-        if (this.playBoard.checkForDivBetweenXO()) {
+        if (!this.playBoard.checkForDivBetweenXO()) {
             switch (winner) {
                 case 'X':
                     return new XWin(this);

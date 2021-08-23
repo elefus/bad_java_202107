@@ -1,9 +1,9 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_6;
+package com.bad_java.homework.hyperskill.tictactoe.part_5;
 
 public class NotFinished extends State {
 
     public NotFinished(Game game) {
-        super(game);
+        super(game, true);
     }
 
     @Override

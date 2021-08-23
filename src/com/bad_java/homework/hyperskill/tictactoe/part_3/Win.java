@@ -1,6 +1,6 @@
-package com.bad_java.homework.hyperskill.tictactoe.part_4;
+package com.bad_java.homework.hyperskill.tictactoe.part_3;
 
-public abstract class Win extends State{
+public abstract class Win extends State {
 
     public Win(Game game) {
         super(game);
