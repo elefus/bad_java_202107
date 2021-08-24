@@ -1,0 +1,17 @@
+@startuml
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+class Throwable<checked> #pink
+class Error<unchecked> #lightgreen
+class Exception<checked> #pink
+class RuntimeException<unchecked> #lightgreen
+
+Throwable <|-- Error
+Throwable <|-- Exception
+Exception <|-- RuntimeException
+
+hide empty members
+
+@enduml
