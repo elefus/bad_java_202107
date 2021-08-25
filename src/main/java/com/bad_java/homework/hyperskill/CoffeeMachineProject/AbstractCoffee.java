@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public abstract class Coffee {
+public abstract class AbstractCoffee {
 
     private int waterAmount;
     private int milkAmount;

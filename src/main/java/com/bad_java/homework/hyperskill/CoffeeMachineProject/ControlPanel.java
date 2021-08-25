@@ -91,7 +91,7 @@ public class ControlPanel {
     }
 
     private static void choiceOfCoffee(String variant) {
-        Coffee coffee = null;
+        AbstractCoffee coffee = null;
         switch (variant) {
             case "back":
                 currentState = State.AWAITING_FOR_COMMAND;
