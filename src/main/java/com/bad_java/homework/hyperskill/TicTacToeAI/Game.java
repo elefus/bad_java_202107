@@ -104,22 +104,22 @@ public class Game {
         return grid[column - 1][row - 1] == '_';
     }
 
-    static void getGameResult(Terminal terminal, char[][] grid) {
+    void getGameResult(Terminal terminal, char[][] grid) {
         char winner = ' ';
         //row and column
         for (int i = 0; i < 3; i++) {
-            if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][0] != ' ') {
+            if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] && grid[i][0] != '_') {
                 winner = grid[i][0];
-            } else if (grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i] && grid[0][i] != ' ') {
+            } else if (grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i] && grid[0][i] != '_') {
                 winner = grid[0][i];
             }
         }
         //1st diagonal
-        if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2] && grid[0][0] != ' ') {
+        if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2] && grid[0][0] != '_') {
             winner = grid[0][0];
         }
         //2d diagonal
-        if (grid[2][0] == grid[1][1] && grid[1][1] == grid[0][2] && grid[2][0] != ' ') {
+        if (grid[2][0] == grid[1][1] && grid[1][1] == grid[0][2] && grid[2][0] != '_') {
             winner = grid[2][0];
         }
         if (winner == ' ' && xAmount + OAmount < 9) {

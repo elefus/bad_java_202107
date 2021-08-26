@@ -21,6 +21,6 @@ public class Launcher {
             isGamerMoved = game.makeAMove(terminal, terminal.readLine());
         } while (!isGamerMoved);
         game.showCurrentGrid(terminal, Game.getGrid());
-        Game.getGameResult(terminal, Game.getGrid());
+        game.getGameResult(terminal, Game.getGrid());
     }
 }
