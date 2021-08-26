@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings({"DefaultAnnotationParam", "unused"})
-@Deprecated(since = "1.4.7", forRemoval = false)
+//@Deprecated(since = "1.4.7", forRemoval = false)
 public class AnnotationExample {
 
   @Measurable(mode = Mode.TIME)
