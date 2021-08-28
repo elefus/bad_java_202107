@@ -1,4 +1,5 @@
 out
+target
 *.iml
 /.idea/.gitignore
 /.idea/checkstyle-idea.xml
