@@ -3,11 +3,14 @@ package com.bad_java.hyperskill.tic_tac_toe;
 import java.util.Scanner;
 
 public class TicTacToeStage5 {
-  static String initialString = "_________";
+  static char[][] initialArray = {
+      {' ', ' ', ' '},
+      {' ', ' ', ' '},
+      {' ', ' ', ' '},
+  };
 
   public static void main(String[] args) {
-    String userInput = initialString.replace('_', ' ');
-    char[][] table = StateOfGame5.printTable(userInput);
+    char[][] table = StateOfGame5.printTable(initialArray);
 
     Scanner scanner = new Scanner(System.in);
     int count = 1;
@@ -34,38 +37,31 @@ public class TicTacToeStage5 {
       } while (!(userCoordinate1.matches("[123]+") &&
           userCoordinate2.matches("[123]+")&& !occupiedCell) );
 
-      String newTableString = StateOfGame5.addMove(table, Integer.parseInt(userCoordinate1),
+      char[][] newTable = StateOfGame5.addMove(table, Integer.parseInt(userCoordinate1),
           Integer.parseInt(userCoordinate2), count);
-      StateOfGame5.printTable(newTableString);
+      StateOfGame5.printTable(newTable);
       count++;
-      if (count == 10) {
+      if (count == 9) {
         System.out.println("Draw");
       }
     } while (!(StateOfGame5.isRowWin(table) || StateOfGame5.isColumnWin(table) ||
-        StateOfGame5.isDiagonalWin(table) || count == 10));
+        StateOfGame5.isDiagonalWin(table) || count == 9));
   }
 }
 
 class StateOfGame5 {
 
-  public static char[][] printTable(String userInput) {
-    char[] chars = userInput.toCharArray();
-    char[][] table = new char[3][3];
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        table[i][j] = chars[i * 3 + j];
-      }
-    }
+  public static char[][] printTable(char[][] initialArray) {
     System.out.println("---------");
     for (int i = 0; i < 3; i++) {
       System.out.print("| ");
       for (int j = 0; j < 3; j++) {
-        System.out.print(table[i][j] + " ");
+        System.out.print(initialArray[i][j] + " ");
       }
       System.out.println("|");
     }
     System.out.println("---------");
-    return table;
+    return initialArray;
   }
 
   public static boolean isOccupiedCell(char[][] table, int x, int y) {
@@ -78,17 +74,13 @@ class StateOfGame5 {
     return isOccupied;
   }
 
-  public static String addMove(char[][] table, int x, int y, int count) {
+  public static char[][] addMove(char[][] table, int x, int y, int count) {
     if (count % 2 == 0) {
       table[x-1][y-1] = 'O';
     } else {
       table[x-1][y-1] = 'X';
     }
-    String result = "";
-    for (char[] chars : table) {
-      result += String.valueOf(chars);
-    }
-    return result;
+    return table;
   }
 
   public static boolean isRowWin(char[][] table) {
