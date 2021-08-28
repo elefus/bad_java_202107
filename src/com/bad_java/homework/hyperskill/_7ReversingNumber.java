@@ -7,9 +7,6 @@ public class _7ReversingNumber {
         Scanner scanner = new Scanner(System.in);
         String number = scanner.next();
         String reversedNumber = new StringBuilder(number).reverse().toString();
-        if (reversedNumber.charAt(0) == '0') {
-            reversedNumber = reversedNumber.substring(1);
-        }
-        System.out.println(reversedNumber);
+        System.out.println(Long.parseLong(reversedNumber));
     }
 }
