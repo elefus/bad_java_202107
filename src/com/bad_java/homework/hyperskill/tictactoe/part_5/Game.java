@@ -35,14 +35,28 @@ public class Game {
     public boolean step(){
         boolean wasDone = false;
         askForStep();
-        int x = this.console.readInt();
-        int y = this.console.readInt();
-        if(Board.Node.Coordinate.checkCoordinate(x - 1, y - 1, playBoard.getWidth(), playBoard.getHeight())){
-            wasDone = this.playBoard.step(x - 1, y - 1, curChar);
-            changeCurChar();
+        int y = Integer.MIN_VALUE;
+        int x = Integer.MIN_VALUE;
+        if (this.console.hasNextInt()) {
+            y = this.console.readInt();
+            if (this.console.hasNextInt()) {
+                x = this.console.readInt();
+                if (Board.Node.Coordinate.checkCoordinate(x - 1, y - 1, playBoard.getWidth(), playBoard.getHeight())) {
+                    wasDone = this.playBoard.step(x - 1, y - 1, curChar);
+                    if (wasDone) {
+                        changeCurChar();
+                    }
+                } else {
+                    //выбросить исключение
+                    console.println("Coordinates should be from 1 to 3!");
+                }
+            } else {
+                String delete = console.readLine();
+                console.println("You should enter numbers!");
+            }
         } else {
-            //выбросить исключение
-            console.println("Wrong coordinates (step)");
+            String delete = console.readLine();
+            console.println("You should enter numbers!");
         }
         return wasDone;
 

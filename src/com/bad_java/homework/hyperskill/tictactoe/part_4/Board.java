@@ -162,7 +162,7 @@ public class Board {
             }
         } else {
             //выбросить исключение
-            console.println("Wrong coordinates (step) or is oresent");
+            console.println("This cell is occupied! Choose another one!");
             return false;
         }
     }

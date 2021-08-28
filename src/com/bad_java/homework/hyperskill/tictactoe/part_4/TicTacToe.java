@@ -4,6 +4,7 @@ public class TicTacToe {
     public static void main(String[] args) {
         Terminal console = new Terminal();
         Game curGame = new Game(console);
+        console.print("Enter cells: ");
         String gameBoard = console.readLine();
         CheckInput check = new CheckInput() {
             @Override

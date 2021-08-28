@@ -162,7 +162,7 @@ public class Board {
             }
         } else {
             //выбросить исключение
-            console.println("Wrong coordinates (step) or is oresent");
+            console.println("This cell is occupied! Choose another one!");
             return false;
         }
     }
@@ -178,11 +178,11 @@ public class Board {
                 countO++;
             }
         }
-        if (countX + countO > 1) {
+        if (countX + countO > 1 && countX != 0 && countO != 0) {
             return 'I';
-        } else if (countO == 1) {
+        } else if (countO != 0) {
             return 'O';
-        } else if (countX == 1) {
+        } else if (countX != 0) {
             return 'X';
         } else {
             return '_';

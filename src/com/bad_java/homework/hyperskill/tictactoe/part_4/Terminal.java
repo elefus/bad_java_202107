@@ -35,4 +35,8 @@ public class Terminal {
     public int readInt() {
         return in.nextInt();
     }
+
+    public boolean hasNextInt() {
+        return in.hasNextInt();
+    }
 }

@@ -5,10 +5,14 @@ public class TicTacToe {
         Terminal console = new Terminal();
         Game curGame = new Game(console);
         curGame.printBoard();
+        boolean wasDone;
         do {
-            curGame.getState().nextStep();
-            curGame.printBoard();
+            wasDone = curGame.getState().nextStep();
+            if (wasDone) {
+                curGame.printBoard();
+            }
         } while (curGame.getState().isRepeating());
+        console.println(curGame.getState().printState());
     }
 
 }
