@@ -1,0 +1,33 @@
+@startuml
+
+'default
+left to right direction
+
+:Client: -- (Find books)
+(Find books) <.- (By ISBN ) : extends
+(Find books) <.- (By title ) : extends
+(Find books) <.- (By author ) : extends
+(Find books) <.- (By year ) : extends
+:Client: -- (Take book)
+:Client: -- (Return book)
+
+:Manager: -- (Add book)
+:Manager: -- (Delete book)
+
+usecase FIND_BOOKS_MANAGER as "Find books
+---
+Including info about
+price and open tickets"
+:Manager: -- (FIND_BOOKS_MANAGER)
+
+(FIND_BOOKS_MANAGER) <.- (By ISBN) : extends
+(FIND_BOOKS_MANAGER) <.- (By title) : extends
+(FIND_BOOKS_MANAGER) <.- (By author) : extends
+(FIND_BOOKS_MANAGER) <.- (By year) : extends
+(FIND_BOOKS_MANAGER) <.- (By user) : extends
+
+:Admin: -- (Find users)
+:Admin: -- (Add user)
+:Admin: -- (Delete user)
+
+@enduml
