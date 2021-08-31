@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.CoffeeMachine._05_06;
+package main.java.com.bad_java.homework.hyperskill.CoffeeMachine._05_06;
 
 public class CoffeeMachine5 {
     public static void main(String[] args) {
