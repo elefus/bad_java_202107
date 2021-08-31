@@ -13,7 +13,7 @@ public class Game {
     private static String firstPlayer;
     private static String secondPlayer;
     static int xAmount = 0;
-    static int OAmount = 0;
+    static int oAmount = 0;
 
     public void showCurrentGrid(Terminal terminal) {
         terminal.println("---------");
@@ -29,7 +29,7 @@ public class Game {
     public String getGameParam(Terminal terminal, String inputLine) {
         String command = null;
         xAmount = 0;
-        OAmount = 0;
+        oAmount = 0;
         currentState = ONGOING_GAME;
         String[] input = inputLine.split(" ");
         if (isCommandCorrect(input)) {
@@ -68,7 +68,7 @@ public class Game {
                 aiMoves(terminal, 'X');
             }
             xAmount++;
-            if (OAmount + xAmount > 2) {
+            if (oAmount + xAmount > 2) {
                 getGameResult(terminal);
             }
             if (currentState == ONGOING_GAME) {
@@ -77,8 +77,8 @@ public class Game {
                 } else {
                     aiMoves(terminal, 'O');
                 }
-                OAmount++;
-                if (OAmount + xAmount > 2) {
+                oAmount++;
+                if (oAmount + xAmount > 2) {
                     getGameResult(terminal);
                 }
             }
@@ -163,9 +163,9 @@ public class Game {
         if (grid[2][0] == grid[1][1] && grid[1][1] == grid[0][2] && grid[2][0] != ' ') {
             winner = grid[2][0];
         }
-        if (winner == ' ' && xAmount + OAmount < 9) {
+        if (winner == ' ' && xAmount + oAmount < 9) {
             currentState = ONGOING_GAME;
-        } else if (winner == ' ' && xAmount + OAmount == 9) {
+        } else if (winner == ' ' && xAmount + oAmount == 9) {
             currentState = DRAW;
             terminal.println(DRAW.getMessage());
         } else if (winner != ' ') {

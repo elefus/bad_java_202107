@@ -49,7 +49,7 @@ public class StartGridFromLineImpl implements StartGrid {
             if (c == 'X') {
                 Game.xAmount++;
             } else if (c == 'O') {
-                Game.OAmount++;
+                Game.oAmount++;
             }
         }
     }
