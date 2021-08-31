@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.TicTacToeAI;
+package com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI;
 
 public class StartStandardGridImpl implements StartGrid {
 

@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.TicTacToeAI;
+package com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI;
 
 public class StartGridFromLineImpl implements StartGrid {
 
@@ -15,7 +15,7 @@ public class StartGridFromLineImpl implements StartGrid {
         countStartXandO(input);
     }
 
-    void enterStartGrid(String input) {
+    private void enterStartGrid(String input) {
         int i = 0;
         for (int j = 0; j < 3; j++) {
             for (int k = 0; k < 3; k++) {
@@ -25,7 +25,7 @@ public class StartGridFromLineImpl implements StartGrid {
         }
     }
 
-    boolean isInputLineCorrect(Terminal terminal, String input) {
+    private boolean isInputLineCorrect(Terminal terminal, String input) {
         boolean isCorrect = false;
         if (input.length() == 9) {
             for (int i = 0; i < 9; i++) {
@@ -43,7 +43,7 @@ public class StartGridFromLineImpl implements StartGrid {
         return isCorrect;
     }
 
-    void countStartXandO(String input) {
+    private void countStartXandO(String input) {
         char[] charArray = input.toCharArray();
         for (char c : charArray) {
             if (c == 'X') {

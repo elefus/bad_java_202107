@@ -1,6 +1,6 @@
-package com.bad_java.homework.hyperskill.TicTacToeAI;
+package com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI;
 
-public enum Level {
+enum Level {
     EASY("easy"),
     MEDIUM("medium"),
     HARD("hard");

@@ -1,19 +1,21 @@
-package com.bad_java.homework.hyperskill.TicTacToeAI;
+package com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI;
 
-import static com.bad_java.homework.hyperskill.TicTacToeAI.State.DRAW;
-import static com.bad_java.homework.hyperskill.TicTacToeAI.State.ONGOING_GAME;
-import static com.bad_java.homework.hyperskill.TicTacToeAI.State.WIN;
+import static com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI.State.DRAW;
+import static com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI.State.ONGOING_GAME;
+import static com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI.State.WIN;
 
 import java.util.Random;
 
 public class Game {
 
     static char[][] grid = new char[3][3];
-    static State currentState = ONGOING_GAME;
+    private static State currentState = ONGOING_GAME;
+    private static String firstPlayer;
+    private static String secondPlayer;
     static int xAmount = 0;
     static int OAmount = 0;
 
-    void showCurrentGrid(Terminal terminal) {
+    public void showCurrentGrid(Terminal terminal) {
         terminal.println("---------");
         terminal.println(
             "| " + grid[0][0] + " " + grid[0][1] + " " + grid[0][2] + " |");
@@ -24,7 +26,66 @@ public class Game {
         terminal.println("---------");
     }
 
-    void humanMoves(Terminal terminal) {
+    public String getGameParam(Terminal terminal, String inputLine) {
+        String command = null;
+        xAmount = 0;
+        OAmount = 0;
+        currentState = ONGOING_GAME;
+        String[] input = inputLine.split(" ");
+        if (isCommandCorrect(input)) {
+            command = input[0];
+            if (input.length == 3) {
+                firstPlayer = input[1];
+                secondPlayer = input[2];
+            }
+        } else {
+            terminal.println("Bad parameters!");
+        }
+        return command;
+    }
+
+    private boolean isCommandCorrect(String[] input) {
+        boolean result = false;
+        if (input.length == 3) {
+            if ((input[0].equals("start") &&
+                (input[1].equals("easy") || input[1].equals("user")) &&
+                (input[2].equals("easy") || input[2].equals("user")))) {
+                result = true;
+            }
+        } else if (input.length == 1) {
+            if (input[0].equals("exit")) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    public void playGame(Terminal terminal) {
+        do {
+            if (firstPlayer.equals("user")) {
+                humanMoves(terminal, 'X');
+            } else {
+                aiMoves(terminal, 'X');
+            }
+            xAmount++;
+            if (OAmount + xAmount > 2) {
+                getGameResult(terminal);
+            }
+            if (currentState == ONGOING_GAME) {
+                if (secondPlayer.equals("user")) {
+                    humanMoves(terminal, 'O');
+                } else {
+                    aiMoves(terminal, 'O');
+                }
+                OAmount++;
+                if (OAmount + xAmount > 2) {
+                    getGameResult(terminal);
+                }
+            }
+        } while (currentState == ONGOING_GAME);
+    }
+
+    private void humanMoves(Terminal terminal, char playerChar) {
         boolean isGamerMoved = false;
         String input;
         do {
@@ -47,28 +108,27 @@ public class Game {
                     terminal.println("This cell is occupied! Choose another one!");
                 } else {
                     isGamerMoved = true;
-                    grid[column - 1][row - 1] = 'X';
-                    xAmount++;
+                    grid[column - 1][row - 1] = playerChar;
                 }
             }
         } while (!isGamerMoved);
         showCurrentGrid(terminal);
     }
 
-    boolean isCoordinatesNumbers(String[] coordinates) {
+    private boolean isCoordinatesNumbers(String[] coordinates) {
         return coordinates.length == 2 && coordinates[0].matches("\\d+") && coordinates[1]
             .matches("\\d+");
     }
 
-    boolean isCoordinatesCorrect(int column, int row) {
+    private boolean isCoordinatesCorrect(int column, int row) {
         return column >= 1 && column <= 3 && row >= 1 && row <= 3;
     }
 
-    boolean isCellOccupied(int column, int row) {
+    private boolean isCellOccupied(int column, int row) {
         return grid[column - 1][row - 1] == ' ';
     }
 
-    void aiMoves(Terminal terminal) {
+    private void aiMoves(Terminal terminal, char playerChar) {
         boolean isAIMoved = false;
         Random random = new Random();
         int col;
@@ -77,28 +137,15 @@ public class Game {
             col = random.nextInt(3) + 1;
             row = random.nextInt(3) + 1;
             if (isCellOccupied(col, row)) {
-                grid[col - 1][row - 1] = 'O';
+                grid[col - 1][row - 1] = playerChar;
                 isAIMoved = true;
-                OAmount++;
             }
         } while (!isAIMoved);
         terminal.println("Making move level \"" + Level.EASY.getMessage() + "\"");
         showCurrentGrid(terminal);
     }
 
-    void playGame(Terminal terminal) {
-        do {
-            humanMoves(terminal);
-            if (xAmount + OAmount != 9) {
-                aiMoves(terminal);
-            }
-            if (OAmount + xAmount > 2) {
-                getGameResult(terminal);
-            }
-        } while (currentState == ONGOING_GAME);
-    }
-
-    void getGameResult(Terminal terminal) {
+    private void getGameResult(Terminal terminal) {
         char winner = ' ';
         //row and column
         for (int i = 0; i < 3; i++) {
