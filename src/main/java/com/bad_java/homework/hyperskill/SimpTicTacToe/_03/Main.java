@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.SimpTicTacToe._03;
+package main.java.com.bad_java.homework.hyperskill.SimpTicTacToe._03;
 
 import java.util.Scanner;
 
@@ -53,18 +53,77 @@ public class Main {
         if (countChars(board, symbol) < 3) {
             return false;
         }
-        if (board[0][0] == board[0][1] && board[0][1] == board[0][2] && board[0][2] == symbol ||
-            board[1][0] == board[1][1] && board[1][1] == board[1][2] && board[1][2] == symbol ||
-            board[2][0] == board[2][1] && board[2][1] == board[2][2] && board[2][2] == symbol ||
-            board[0][0] == board[1][0] && board[1][0] == board[2][0] && board[2][0] == symbol ||
-            board[0][1] == board[1][1] && board[1][1] == board[2][1] && board[2][1] == symbol ||
-            board[0][2] == board[1][2] && board[1][2] == board[2][2] && board[2][2] == symbol ||
-            board[0][0] == board[1][1] && board[1][1] == board[2][2] && board[2][2] == symbol ||
-            board[0][2] == board[1][1] && board[1][1] == board[2][0] && board[2][0] == symbol
-            ) {
+        if (isDiagonalWin(board, symbol) || isHorizontalWin(board, symbol) || isVerticalWin(board, symbol)) {
             return true;
         } else {
             return false;}
+    }
+
+    private static boolean isHorizontalWin (char[][] board, char symbol) {
+        int countInLine;
+        for (int i = 0; i < board.length; i++) {
+            countInLine = 0;
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == symbol){
+                    countInLine++;
+                }
+                else {
+                    break;
+                }
+                if (countInLine == board[0].length) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isDiagonalWin (char[][] board, char symbol) {
+        int countInDiag = 0;
+        int j = 0;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][j] == symbol) {
+                j++;
+                countInDiag++;
+            } else {
+                break;
+            }
+            if (countInDiag == board.length){
+                return true;
+            };
+        }
+        countInDiag = 0;
+        j = board.length - 1;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i][j] == symbol) {
+                j--;
+                countInDiag++;
+            } else {
+                break;
+            }
+            if (countInDiag == board.length){
+                return true;
+            };
+        }
+        return false;
+    }
+
+    private static boolean isVerticalWin (char[][] board, char symbol) {
+        int countInColumn;
+        for (int i = 0; i < board[0].length; i++) {
+            countInColumn = 0;
+            for (int j = 0; j < board.length; j++) {
+                if (board[j][i] == symbol){
+                    countInColumn++;
+                } else {
+                    break;
+                }
+                if (countInColumn == board.length) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private static int countChars (char[][] board, char symbol) {
