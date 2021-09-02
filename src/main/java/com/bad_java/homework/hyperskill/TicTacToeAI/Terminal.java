@@ -1,4 +1,4 @@
-package com.bad_java.homework.hyperskill.TicTacToeAI.TicTacToeAI;
+package com.bad_java.homework.hyperskill.TicTacToeAI;
 
 import java.io.InputStream;
 import java.io.PrintStream;
