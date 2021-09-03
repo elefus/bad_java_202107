@@ -8,9 +8,13 @@ import com.bad_java.lectures._03.library.repository.UserRepository;
 import com.bad_java.lectures._03.library.repository.memory.InMemoryBookRepository;
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatcher;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import java.util.function.Consumer;
@@ -18,13 +22,19 @@ import java.util.function.Consumer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+@ExtendWith(MockitoExtension.class)
 class UserServiceTest {
+
+    @Mock
+    UserRepository userRepo;
+
+    @InjectMocks
+    UserService userService;
 
     @SuppressWarnings("unchecked")
     @Test
     void addUserTest() {
         // Arrange
-        UserRepository userRepo = Mockito.mock(UserRepository.class);
         Mockito.when(userRepo.save(Mockito.any())).thenAnswer(new Answer<User>() {
             @Override
             public User answer(InvocationOnMock invocationOnMock) throws Throwable {
@@ -34,7 +44,6 @@ class UserServiceTest {
             }
         });
 
-        UserService userService = new UserService(userRepo);
         User admin = User.builder().username("admin#1").build();
 
         // Act
@@ -57,10 +66,7 @@ class UserServiceTest {
         users.add(User.builder().username("admin#2").type(User.Type.ADMIN).build());
         users.add(User.builder().username("admin#3").type(User.Type.ADMIN).build());
 
-        UserRepository userRepo = Mockito.mock(UserRepository.class);
         Mockito.when(userRepo.findAll()).thenReturn(users);
-
-        UserService userService = new UserService(userRepo);
 
         // Act
         DynamicArray result = userService.getUsers();
