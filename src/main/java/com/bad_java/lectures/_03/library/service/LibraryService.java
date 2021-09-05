@@ -100,4 +100,8 @@ public class LibraryService {
 
         return returnedBook;
     }
+
+    void dummyMethod() {
+
+    }
 }
