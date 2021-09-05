@@ -19,10 +19,10 @@ public class CoffeeMachine {
     public CoffeeMachine(InputStream in, OutputStream out) {
         terminal = new Terminal(in, out);
         resources = Resources.builder().availableMoney(550)
-            .water(Ingredient.valueOf(400, Unit.Milliliter))
-            .milk(Ingredient.valueOf(540, Unit.Milliliter))
-            .beans(Ingredient.valueOf(120, Unit.Gram))
-            .cups(Ingredient.valueOf(400, Unit.Unknown))
+            .water(Ingredient.valueOf(400, Unit.MILLILITER))
+            .milk(Ingredient.valueOf(540, Unit.MILLILITER))
+            .beans(Ingredient.valueOf(120, Unit.GRAM))
+            .cups(Ingredient.valueOf(400, Unit.UNKNOWN))
             .isPowerOn(true)
             .isNecessaryPrintResources(false)
             .build();

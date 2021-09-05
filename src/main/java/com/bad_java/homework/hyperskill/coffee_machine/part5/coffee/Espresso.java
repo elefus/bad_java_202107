@@ -7,9 +7,9 @@ public class Espresso extends Coffee {
 
     public Espresso() {
         data = CoffeeData.builder().requiredCost(4)
-            .water(Ingredient.valueOf(250, Unit.Milliliter))
-            .milk(Ingredient.valueOf(0, Unit.Milliliter))
-            .beans(Ingredient.valueOf(16, Unit.Gram))
+            .water(Ingredient.valueOf(250, Unit.MILLILITER))
+            .milk(Ingredient.valueOf(0, Unit.MILLILITER))
+            .beans(Ingredient.valueOf(16, Unit.GRAM))
             .build();
     }
 }

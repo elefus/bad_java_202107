@@ -18,8 +18,8 @@ public class Ingredient {
     }
 
     public enum Unit implements UnitOfMeasurement {
-        Unknown,
-        Milliliter,
-        Gram
+        UNKNOWN,
+        MILLILITER,
+        GRAM
     }
 }
