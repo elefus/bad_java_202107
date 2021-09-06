@@ -11,7 +11,7 @@ class TicTacToeEngineTest {
 	void testUserMake() {
 		TicTacToeEngine ticTacToeEngine = new TicTacToeEngine();
 
-		ticTacToeEngine.makePlayerMove(1, 1);
+		ticTacToeEngine.makePlayerStep(1, 1);
 
 		assertThat(ticTacToeEngine.gameBoardToString()).isEqualTo(
 				"---------" + System.lineSeparator() +
@@ -25,18 +25,18 @@ class TicTacToeEngineTest {
 	void testIncorrectCoordinate() {
 		TicTacToeEngine ticTacToeEngine = new TicTacToeEngine();
 
-		ticTacToeEngine.makePlayerMove(1, 1);
+		ticTacToeEngine.makePlayerStep(1, 1);
 
 		assertThatIllegalArgumentException().
-				isThrownBy(() -> ticTacToeEngine.makePlayerMove(5, 5))
+				isThrownBy(() -> ticTacToeEngine.makePlayerStep(5, 5))
 				.withMessage("Coordinates should be from 1 to 3!");
 
 		assertThatIllegalArgumentException().
-				isThrownBy(() -> ticTacToeEngine.makePlayerMove(-1, -1))
+				isThrownBy(() -> ticTacToeEngine.makePlayerStep(-1, -1))
 				.withMessage("Coordinates should be from 1 to 3!");
 
 		assertThatIllegalArgumentException().
-				isThrownBy(() -> ticTacToeEngine.makePlayerMove(1, 4))
+				isThrownBy(() -> ticTacToeEngine.makePlayerStep(1, 4))
 				.withMessage("Coordinates should be from 1 to 3!");
 
 
@@ -46,15 +46,15 @@ class TicTacToeEngineTest {
 	void testOccupiedCoordinate() {
 		TicTacToeEngine ticTacToeEngine = new TicTacToeEngine();
 
-		ticTacToeEngine.makePlayerMove(1, 1);
-		ticTacToeEngine.makePlayerMove(2, 2);
+		ticTacToeEngine.makePlayerStep(1, 1);
+		ticTacToeEngine.makePlayerStep(2, 2);
 
 		assertThatIllegalArgumentException().
-				isThrownBy(() -> ticTacToeEngine.makePlayerMove(1, 1))
+				isThrownBy(() -> ticTacToeEngine.makePlayerStep(1, 1))
 				.withMessage("This cell is occupied! Choose another one!");
 
 		assertThatIllegalArgumentException().
-				isThrownBy(() -> ticTacToeEngine.makePlayerMove(2, 2))
+				isThrownBy(() -> ticTacToeEngine.makePlayerStep(2, 2))
 				.withMessage("This cell is occupied! Choose another one!");
 	}
 

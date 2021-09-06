@@ -116,10 +116,10 @@ class TicTacToeEngineTest {
 
 	@Nested
 	@DisplayName("Тесты выполнения хода игрока")
-	class TestMakeMove {
+	class TestMakeStep {
 
 		@Test
-		void testMakeMove() {
+		void testMakeStep() {
 			StringBuilder terminalOutputStr = new StringBuilder();
 			doAnswer(invocationOnMock -> {
 				terminalOutputStr.append(invocationOnMock.getArgument(0).toString());

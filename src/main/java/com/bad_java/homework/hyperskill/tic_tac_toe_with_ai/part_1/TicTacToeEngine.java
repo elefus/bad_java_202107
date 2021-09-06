@@ -99,7 +99,7 @@ public class TicTacToeEngine {
 			try {
 				coordinate1 = Integer.parseInt(coordinates[0]);
 				coordinate2 = Integer.parseInt(coordinates[1]);
-				makeMove(coordinate1, coordinate2);
+				makeStep(coordinate1, coordinate2);
 				break;
 			} catch (NumberFormatException ex) {
 				terminal.println("You should enter numbers!");
@@ -109,7 +109,7 @@ public class TicTacToeEngine {
 		}
 	}
 
-	private void makeMove(int coordinate1, int coordinate2) throws IllegalArgumentException {
+	private void makeStep(int coordinate1, int coordinate2) throws IllegalArgumentException {
 		coordinate1--;
 		coordinate2--;
 
@@ -251,6 +251,6 @@ public class TicTacToeEngine {
 	private enum RowState {
 		X_WIN,
 		O_WIN,
-		NOBODY;
+		NOBODY
 	}
 }

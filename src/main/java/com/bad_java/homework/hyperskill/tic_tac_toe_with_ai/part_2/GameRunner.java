@@ -24,10 +24,10 @@ public class GameRunner {
 			try {
 				int coordinate1 = Integer.parseInt(coordinates[0]);
 				int coordinate2 = Integer.parseInt(coordinates[1]);
-				ticTacToeEngine.makePlayerMove(coordinate1, coordinate2);
+				ticTacToeEngine.makePlayerStep(coordinate1, coordinate2);
 				terminal.print(ticTacToeEngine.gameBoardToString());
 				terminal.println("Making move level \"easy\"");
-				ticTacToeEngine.makeAiMove();
+				ticTacToeEngine.makeAiStep();
 				terminal.print(ticTacToeEngine.gameBoardToString());
 			} catch (NumberFormatException ex) {
 				terminal.println("You should enter numbers!");
