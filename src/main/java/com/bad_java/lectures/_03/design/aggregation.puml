@@ -1,0 +1,16 @@
+@startuml
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+interface BookRepository
+interface BookTicketRepository
+BookRepository <|.- InMemoryBookRepository
+BookTicketRepository <|.- InMemoryBookTicketRepository
+
+LibraryService o-- BookRepository
+LibraryService o-- BookTicketRepository
+
+hide empty members
+
+@enduml
