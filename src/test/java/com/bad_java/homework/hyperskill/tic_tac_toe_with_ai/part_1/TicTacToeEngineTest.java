@@ -1,15 +1,12 @@
 package com.bad_java.homework.hyperskill.tic_tac_toe_with_ai.part_1;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
@@ -27,9 +24,22 @@ class TicTacToeEngineTest {
 	@Mock
 	Terminal terminal;
 
+	StringBuilder terminalOutputStr = new StringBuilder();
+
 	@BeforeEach
 	void setUp() {
 		MockitoAnnotations.openMocks(this);
+
+		doAnswer(invocationOnMock -> {
+			terminalOutputStr.append(invocationOnMock.getArgument(0).toString());
+			terminalOutputStr.append('\n');
+			return null;
+		}).when(terminal).println(Mockito.any());
+
+		doAnswer(invocationOnMock -> {
+			terminalOutputStr.append('\n');
+			return null;
+		}).when(terminal).println();
 	}
 
 	@Nested
@@ -39,17 +49,6 @@ class TicTacToeEngineTest {
 		@Test
 		void readGameBoardFromTerminal1() {
 			TicTacToeEngine ticTacToeEngine = new TicTacToeEngine(terminal);
-			StringBuilder terminalOutputStr = new StringBuilder();
-			doAnswer(invocationOnMock -> {
-				terminalOutputStr.append(invocationOnMock.getArgument(0).toString());
-				terminalOutputStr.append('\n');
-				return null;
-			}).when(terminal).println(Mockito.any());
-
-			doAnswer(invocationOnMock -> {
-				terminalOutputStr.append('\n');
-				return null;
-			}).when(terminal).println();
 
 			when(terminal.nextLine()).thenReturn("XX_XOXOO_");
 
