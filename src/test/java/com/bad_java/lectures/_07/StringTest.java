@@ -22,7 +22,16 @@ public class StringTest {
         int first = repeatable.indexOf("abc");
         int result = repeatable.indexOf("abc", first + 1);
         assertThat(result).isEqualTo(7);
+    }
 
+    @Test
+    void trimOrStripTest() {
+        assertThat("       \t\r\n".trim()).isEmpty();
+        assertThat("       \t\r\n".strip()).isEmpty();
 
+        assertThat("   \u0000  ab  \t\r\n".trim()).isEqualTo("ab");
+        assertThat("   \u0000  ab  \t\r\n".strip()).isEqualTo("\u0000  ab");
+        assertThat("   \u0000  ab  \t\r\n".stripLeading()).isEqualTo("\u0000  ab  \t\r\n");
+        assertThat("   \u0000  ab  \t\r\n".stripTrailing()).isEqualTo("   \u0000  ab");
     }
 }
