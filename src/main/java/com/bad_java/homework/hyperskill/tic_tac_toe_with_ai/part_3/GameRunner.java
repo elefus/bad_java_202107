@@ -77,7 +77,7 @@ public class GameRunner {
 		} else if (playerName.equals("user")) {
 			return new RealPlayer(terminal, playerSymbol);
 		}
-		throw new IllegalArgumentException("Bad parameters");
+		throw new IllegalArgumentException("Bad parameters!");
 	}
 
 	private void makePlayerStep() {
