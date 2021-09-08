@@ -7,6 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringTest {
 
+    static String staticField = "literal";
+
     @Test
     void string() {
         String emptyString = "";

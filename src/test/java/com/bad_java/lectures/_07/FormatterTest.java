@@ -3,6 +3,8 @@ package com.bad_java.lectures._07;
 import org.junit.jupiter.api.Test;
 
 import java.util.Formatter;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -50,7 +52,35 @@ public class FormatterTest {
         Formatter formatter = new Formatter();
         String result = formatter.format("Decimal: %3$.1f | Integer: %2$d | Again integer: %<d | String: %1$s", "abc", 5, 0.1).toString();
         assertThat(result).isEqualTo("Decimal: 0,1 | Integer: 5 | Again integer: 5 | String: abc");
+    }
 
+    @Test
+    void formatterPerformanceTest() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Formatter formatter = new Formatter(stringBuilder);
+        ThreadLocalRandom rand = ThreadLocalRandom.current();
 
+        long start = System.nanoTime();
+
+        for (int i = 0; i < 1000; i++) {
+            System.out.println(formatter.format("Text %d - %f%n", rand.nextInt(), rand.nextDouble()));
+        }
+
+        long finish = System.nanoTime();
+        System.out.println(TimeUnit.NANOSECONDS.toSeconds(finish - start));
+    }
+
+    @Test
+    void baselineFormatterPerformanceTest() {
+        ThreadLocalRandom rand = ThreadLocalRandom.current();
+
+        long start = System.nanoTime();
+
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("Text " + rand.nextInt() + " - " + rand.nextDouble() + System.lineSeparator());
+        }
+
+        long finish = System.nanoTime();
+        System.out.println(TimeUnit.NANOSECONDS.toSeconds(finish - start));
     }
 }
