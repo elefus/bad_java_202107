@@ -24,6 +24,10 @@ public class Terminal {
         out.flush();
     }
 
+    public void printf(String s, Object... objects) {
+        out.printf(s, objects);
+    }
+
     public String readLine() {
         return in.nextLine();
     }
