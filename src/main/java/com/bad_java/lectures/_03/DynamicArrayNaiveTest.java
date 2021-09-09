@@ -2,7 +2,7 @@ package com.bad_java.lectures._03;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class DynamicArrayTest {
+public class DynamicArrayNaiveTest {
 
   public static void main(String[] args) {
     DynamicArray dynamicArray = new DynamicArray();
