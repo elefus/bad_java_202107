@@ -35,8 +35,10 @@ public class Game {
         boolean result = false;
         if (input.length == 3) {
             if (input[0].equals("start") &&
-                (input[1].equals("easy") || input[1].equals("user") || input[1].equals("medium")) &&
-                (input[2].equals("easy") || input[2].equals("user") || input[2].equals("medium"))) {
+                (input[1].equals("easy") || input[1].equals("user") || input[1].equals("medium")
+                    || input[1].equals("hard")) &&
+                (input[2].equals("easy") || input[2].equals("user") || input[2].equals(
+                    "medium") || input[2].equals("hard"))) {
                 result = true;
             }
         } else if (input.length == 1) {
@@ -101,6 +103,9 @@ public class Game {
                 break;
             case "medium":
                 ai = new AIMediumImpl();
+                break;
+            case "hard":
+                ai = new AIHardImpl();
                 break;
         }
         terminal.printf("Making move level \"%s\"%n", level);
