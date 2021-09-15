@@ -8,8 +8,8 @@ public class Game {
 
     public static char[][] grid = new char[3][3];
     static State currentState = ONGOING_GAME;
-    private static String firstPlayer;
-    private static String secondPlayer;
+    static String firstPlayer;
+    static String secondPlayer;
     static int xAmount = 0;
     static int oAmount = 0;
 
@@ -17,7 +17,7 @@ public class Game {
         String command = null;
         xAmount = 0;
         oAmount = 0;
-        currentState = ONGOING_GAME;
+        currentState = State.ONGOING_GAME;
         String[] input = inputLine.split(" ");
         if (isCommandCorrect(input)) {
             command = input[0];
