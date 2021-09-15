@@ -1,4 +1,4 @@
-package com.bad_java.lectures;
+package com.bad_java.lectures._08;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -9,6 +9,41 @@ public class CustomOptional<T> {
 
     public CustomOptional(T value) {
         this.value = value;
+    }
+
+    public void ifPresent(Consumer<T> action) {
+        if (value != null) {
+            action.accept(value);
+        }
+    }
+
+    public CustomOptional<T> filter(Predicate<T> predicate) {
+        if (value == null) {
+            return this;
+        }
+        if (predicate.test(value)) {
+            return this;
+        }
+        return new CustomOptional<>(null);
+    }
+
+    public <R> CustomOptional<R> map(Function<T, R> function) {
+        if (value == null) {
+            return new CustomOptional<>(null);
+        }
+        R result = function.apply(value);
+        return new CustomOptional<>(result);
+    }
+
+    public T orElse(T defaultValue) {
+        return value == null ? defaultValue : value;
+    }
+
+    public <E extends Throwable> T orElseThrow(E exception) throws E {
+        if (value == null) {
+            throw exception;
+        }
+        return value;
     }
 
     public boolean isPresent() {
