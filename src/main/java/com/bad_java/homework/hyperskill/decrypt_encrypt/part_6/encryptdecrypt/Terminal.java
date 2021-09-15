@@ -1,14 +1,12 @@
-package com.bad_java.homework.hyperskill.tic_tac_toe_with_ai.part_3;
+package com.bad_java.homework.hyperskill.decrypt_encrypt.part_6.encryptdecrypt;
 
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 /**
- * @author Kirill Mololkin Kirill-mol 18.08.2021
+ * @author Kirill Mololkin Kirill-mol 10.09.2021
  */
 public class Terminal {
 
