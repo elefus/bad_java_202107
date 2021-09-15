@@ -1,10 +1,12 @@
 package com.bad_java.lectures._08;
 
+import com.bad_java.lectures._08.library.domain.Ticket;
 import com.bad_java.lectures._08.library.domain.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -133,5 +135,33 @@ class CustomOptionalTest {
         assertThat(user).isNotNull();
 
         assertThatCode(() -> notFoundById().orElseThrow(new NoSuchElementException())).isExactlyInstanceOf(NoSuchElementException.class);
+    }
+
+    public static User findUser() {
+        return User.builder().username("elefus").id(1).build();
+    }
+
+    @Test
+    void optionalExample() {
+        User user = findUser();
+        if (user == null) {
+            return;
+        }
+        Ticket ticket = user.getTicket();
+        if (ticket == null) {
+            return;
+        }
+        String startDate = ticket.getStartDate();
+        if (startDate == null) {
+            return;
+        }
+        System.out.println(startDate.startsWith("2020"));
+
+
+        Optional.of(findUser())
+                .map(User::getTicket)
+                .map(Ticket::getStartDate)
+                .filter(date -> date.startsWith("2020"))
+                .ifPresent(System.out::println);
     }
 }

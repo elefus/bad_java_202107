@@ -11,7 +11,7 @@ public interface BookRepository extends CrudRepository<Book, Long> {
 
     Book findByIsbn(String isbn);
 
-    DynamicArray findByTitle(String title);
+    DynamicArray<Book> findByTitle(String title);
 
-    DynamicArray findByAuthor(String author);
+    DynamicArray<Book> findByAuthor(String author);
 }

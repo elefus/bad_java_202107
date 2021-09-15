@@ -13,6 +13,7 @@ public class User {
     String username;
     String password;
     Type type;
+    Ticket ticket;
 
     public enum Type {
         ADMIN,
