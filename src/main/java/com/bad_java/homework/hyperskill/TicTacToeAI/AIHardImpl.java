@@ -51,7 +51,7 @@ public class AIHardImpl extends AI {
         for (int i = 0; i < availSpots.length; i++) {
             int temp = newBoard[availSpots[i]];
             newBoard[availSpots[i]] = hardPlayer;
-            int score = miniMax(newBoard, 0, false);
+            int score = miniMax(newBoard, false);
             newBoard[availSpots[i]] = temp;
             if (score > bestScore) {
                 bestScore = score;
@@ -61,7 +61,7 @@ public class AIHardImpl extends AI {
         return move;
     }
 
-    private int miniMax(int[] newBoard, int depth, boolean isMaximizing) {
+    private int miniMax(int[] newBoard, boolean isMaximizing) {
         int[] availSpots = emptyIndices(newBoard);
 
         if (winning(newBoard, nonHardPlayer)) {
@@ -77,7 +77,7 @@ public class AIHardImpl extends AI {
             for (int i = 0; i < availSpots.length; i++) {
                 int temp = newBoard[availSpots[i]];
                 newBoard[availSpots[i]] = hardPlayer;
-                int score = miniMax(newBoard, depth + 1, false);
+                int score = miniMax(newBoard, false);
                 newBoard[availSpots[i]] = temp;
                 bestScore = Math.max(score, bestScore);
             }
@@ -86,7 +86,7 @@ public class AIHardImpl extends AI {
             for (int i = 0; i < availSpots.length; i++) {
                 int temp = newBoard[availSpots[i]];
                 newBoard[availSpots[i]] = nonHardPlayer;
-                int score = miniMax(newBoard, depth + 1, true);
+                int score = miniMax(newBoard, true);
                 newBoard[availSpots[i]] = temp;
                 bestScore = Math.min(score, bestScore);
             }
