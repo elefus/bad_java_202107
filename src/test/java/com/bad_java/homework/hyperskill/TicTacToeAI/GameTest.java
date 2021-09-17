@@ -11,19 +11,28 @@ import static com.bad_java.homework.hyperskill.TicTacToeAI.State.ONGOING_GAME;
 import static com.bad_java.homework.hyperskill.TicTacToeAI.State.WIN;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+@TestInstance(Lifecycle.PER_CLASS)
 class GameTest {
 
     Terminal terminal = new Terminal(System.in, System.out);
     Game game = new Game();
 
+    @AfterEach
+    void tearDown() {
+        firstPlayer = null;
+        secondPlayer = null;
+        currentState = ONGOING_GAME;
+    }
+
     @Test
     void getCorrectParamStart() {
-        String input = "start user easy";
-
-        String command = game.getGameParam(terminal, input);
+        String command = game.getGameParam(terminal, "start user easy");
 
         assertThat(currentState).isSameAs(ONGOING_GAME);
         assertThat(xAmount).isSameAs(0);
@@ -31,16 +40,11 @@ class GameTest {
         assertThat(command.equals("start"));
         assertThat(firstPlayer).isEqualTo("user");
         assertThat(secondPlayer).isEqualTo("easy");
-
-        firstPlayer = null;
-        secondPlayer = null;
     }
 
     @Test
     void getCorrectParamExit() {
-        String input = "exit";
-
-        String command = game.getGameParam(terminal, input);
+        String command = game.getGameParam(terminal, "exit");
 
         assertThat(command).isEqualTo("exit");
         assertThat(firstPlayer).isNull();
@@ -49,22 +53,19 @@ class GameTest {
 
     @Test
     void getIncorrectParam1() {
-        String input = "start user aaa";
-        String command = game.getGameParam(terminal, input);
+        String command = game.getGameParam(terminal, "start user aaa");
         assertThat(command).isNull();
     }
 
     @Test
     void getIncorrectParam2() {
-        String input = "start";
-        String command = game.getGameParam(terminal, input);
+        String command = game.getGameParam(terminal, "start");
         assertThat(command).isNull();
     }
 
     @Test
     void getIncorrectParam3() {
-        String input = "start user";
-        String command = game.getGameParam(terminal, input);
+        String command = game.getGameParam(terminal, "start user");
         assertThat(command).isNull();
     }
 
@@ -87,10 +88,6 @@ class GameTest {
         newGrid.createStartGrid(terminal);
         game.playGame(terminal);
         assertThat(currentState).isSameAs(DRAW);
-
-        firstPlayer = null;
-        secondPlayer = null;
-        currentState = ONGOING_GAME;
     }
 
     @Test
@@ -105,17 +102,13 @@ class GameTest {
         game.playGame(terminal);
         boolean result = currentState == WIN || currentState == DRAW;
         assertThat(result).isTrue();
-
-        firstPlayer = null;
-        secondPlayer = null;
-        currentState = ONGOING_GAME;
     }
 
     @Test
-    void playGameMediumAgainstEasy() {
+    void playGameHardAgainstEasy() {
         StartGrid newGrid = new StartStandardGridImpl();
-        game.getGameParam(terminal, "start medium easy");
-        Assumptions.assumeTrue(firstPlayer.equals("medium"));
+        game.getGameParam(terminal, "start hard easy");
+        Assumptions.assumeTrue(firstPlayer.equals("hard"));
         Assumptions.assumeTrue(secondPlayer.equals("easy"));
         Assumptions.assumeTrue(currentState == ONGOING_GAME);
 
@@ -123,10 +116,6 @@ class GameTest {
         game.playGame(terminal);
         assertThat(currentState).isSameAs(WIN);
         assertThat(game.getGameResult()).isEqualTo('X');
-
-        firstPlayer = null;
-        secondPlayer = null;
-        currentState = ONGOING_GAME;
     }
 
     @Test
@@ -148,6 +137,5 @@ class GameTest {
                 grid[i][j] = ' ';
             }
         }
-        currentState = ONGOING_GAME;
     }
 }
