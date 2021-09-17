@@ -11,11 +11,14 @@ import static com.bad_java.homework.hyperskill.TicTacToeAI.State.ONGOING_GAME;
 import static com.bad_java.homework.hyperskill.TicTacToeAI.State.WIN;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 @TestInstance(Lifecycle.PER_CLASS)
 class GameTest {
@@ -51,22 +54,15 @@ class GameTest {
         assertThat(secondPlayer).isNull();
     }
 
-    @Test
+    @MethodSource(value = "paramsGenerator")
+    @ParameterizedTest
     void getIncorrectParam1() {
         String command = game.getGameParam(terminal, "start user aaa");
         assertThat(command).isNull();
     }
 
-    @Test
-    void getIncorrectParam2() {
-        String command = game.getGameParam(terminal, "start");
-        assertThat(command).isNull();
-    }
-
-    @Test
-    void getIncorrectParam3() {
-        String command = game.getGameParam(terminal, "start user");
-        assertThat(command).isNull();
+    static Stream<String> paramsGenerator() {
+        return Stream.of("start user aaa", "start", "start user");
     }
 
     @Test
