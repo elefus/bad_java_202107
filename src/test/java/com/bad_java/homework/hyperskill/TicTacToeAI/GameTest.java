@@ -119,17 +119,56 @@ class GameTest {
     }
 
     @Test
-    void getWinGameResult() {
-        grid[0][0] = 'X';
-        grid[0][1] = 'O';
-        grid[0][2] = ' ';
-        grid[1][0] = ' ';
-        grid[1][1] = 'X';
-        grid[1][2] = ' ';
-        grid[2][0] = ' ';
-        grid[2][1] = 'O';
-        grid[2][2] = 'X';
+    void getWinGameResultDiagonal() {
+        char[] startString = new char[]{'X', 'O', ' ', ' ', 'X', ' ', ' ', 'O', 'X'};
+        int n = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                grid[i][j] = startString[n];
+                n++;
+            }
+        }
         assertThat(game.getGameResult()).isEqualTo('X');
+        assertThat(currentState).isSameAs(WIN);
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                grid[i][j] = ' ';
+            }
+        }
+    }
+
+    @Test
+    void getWinGameResultRow() {
+        char[] startString = new char[]{'X', 'O', 'O', 'O', ' ', ' ', 'X', 'X', 'X'};
+        int n = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                grid[i][j] = startString[n];
+                n++;
+            }
+        }
+        assertThat(game.getGameResult()).isEqualTo('X');
+        assertThat(currentState).isSameAs(WIN);
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                grid[i][j] = ' ';
+            }
+        }
+    }
+
+    @Test
+    void getWinGameResultColumn() {
+        char[] startString = new char[]{' ', 'X', 'O', ' ', 'X', 'O', 'X', ' ', 'O'};
+        int n = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                grid[i][j] = startString[n];
+                n++;
+            }
+        }
+        assertThat(game.getGameResult()).isEqualTo('O');
         assertThat(currentState).isSameAs(WIN);
 
         for (int i = 0; i < 3; i++) {
