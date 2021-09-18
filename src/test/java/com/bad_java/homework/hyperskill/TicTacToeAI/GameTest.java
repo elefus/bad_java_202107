@@ -57,8 +57,8 @@ class GameTest {
 
     @MethodSource(value = "paramsGenerator")
     @ParameterizedTest
-    void getIncorrectParam1() {
-        String command = game.getGameParam(terminal, "start user aaa");
+    void getIncorrectParam(String input) {
+        String command = game.getGameParam(terminal, input);
         assertThat(command).isNull();
     }
 
