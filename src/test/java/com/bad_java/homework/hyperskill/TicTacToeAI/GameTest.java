@@ -17,14 +17,20 @@ import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 @TestInstance(Lifecycle.PER_CLASS)
 class GameTest {
 
-    Terminal terminal = new Terminal(System.in, System.out);
+    @Mock
+    Terminal terminal;
     Game game = new Game();
 
     @AfterEach
@@ -60,6 +66,7 @@ class GameTest {
     void getIncorrectParam(String input) {
         String command = game.getGameParam(terminal, input);
         assertThat(command).isNull();
+        Mockito.verify(terminal, Mockito.atLeast(1)).println("Bad parameters!");
     }
 
     static Stream<String> paramsGenerator() {
