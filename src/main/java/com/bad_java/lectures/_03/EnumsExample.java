@@ -166,10 +166,3 @@ public class EnumsExample {
 
 
 
-enum Season {
-  UNKNOWN,
-  SPRING,
-  WINTER,
-  SUMMER,
-  AUTUMN
-}
