@@ -46,6 +46,10 @@ class User {
   String username;
   int rating;
 
+  public User(String id, String username) {
+    this(Long.parseLong(id), username);
+  }
+
   public User(long id, String username) {
     this.id = id;
     this.username = username;
