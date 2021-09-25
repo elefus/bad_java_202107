@@ -31,6 +31,14 @@
             <version>1.18.20</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.atp-fivt</groupId>
+            <artifactId>ljv</artifactId>
+            <version>1.03</version>
+        </dependency>
+
+        <!-- TEST -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>

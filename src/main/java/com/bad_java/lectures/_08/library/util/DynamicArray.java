@@ -3,23 +3,40 @@ package com.bad_java.lectures._08.library.util;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class DynamicArray implements Iterable {
+class Test {
 
-  private Object[] values;
+  public static void main(String[] args) {
+    DynamicArray<Number> numbers = new DynamicArray<>();
+    numbers.add(1);
+    numbers.add(1.0);
+
+    System.out.println(numbers.get(0));
+    System.out.println(numbers.get(1));
+  }
+}
+
+public class DynamicArray<E> implements Iterable<E> {
+
+  private E[] values;
   private int size;
 
   public DynamicArray() {
-    values = new Object[0];
+    this(0);
+  }
+
+  public DynamicArray(int initialSize) {
+    // Number[] = Object[]
+    values = (E[]) new Object[initialSize];
     size = 0;
   }
 
-  public void add(Object value) {
+  public void add(E value) {
     resizeIfNeeded();
     values[size++] = value;
   }
 
   // Overloading
-  public void add(Object value, int position) {
+  public void add(E value, int position) {
     if (position > size) {
       System.err.println("IllegalArgument: position = " + position);
     } else if (position == size) {
@@ -32,7 +49,7 @@ public class DynamicArray implements Iterable {
     }
   }
 
-  public void set(Object value, int position) {
+  public void set(E value, int position) {
     if (position < 0 || position >= size) {
       System.err.println("IllegalArgument: position = " + position);
       return;
@@ -48,7 +65,7 @@ public class DynamicArray implements Iterable {
     return size == 0;
   }
 
-  public Object get(int position) {
+  public E get(int position) {
     if (position < 0 || position >= size) {
       System.err.println("IllegalArgument: position = " + position);
       return null;
@@ -99,18 +116,18 @@ public class DynamicArray implements Iterable {
   }
 
   @Override
-  public Iterator iterator() {
+  public Iterator<E> iterator() {
     return new DynamicArrayIterator();
   }
 
   public void clean() {
-    values = new Object[0];
+    values = (E[]) new Object[0];
     size = 0;
   }
 
   // static class => nested
   // class => inner
-  private class DynamicArrayIterator implements Iterator {
+  private class DynamicArrayIterator implements Iterator<E> {
 
     private int position;
 
@@ -138,7 +155,7 @@ public class DynamicArray implements Iterable {
     }
 
     @Override
-    public Object next() {
+    public E next() {
       return values[position++];
     }
   }

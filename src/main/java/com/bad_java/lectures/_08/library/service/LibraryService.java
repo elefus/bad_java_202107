@@ -92,7 +92,7 @@ public class LibraryService {
 
     public Book returnBook(User client, long ticketId) {
         System.err.println("Client " + client + " trying to return a book to the library by ticket: " + ticketId);
-        BookTicket ticket = bookTicketRepository.findById(ticketId);
+        BookTicket ticket = bookTicketRepository.findById(ticketId).get();
         if (ticket == null) {
             System.err.println("Cannot find a ticket with id: " + ticketId);
             return null;
