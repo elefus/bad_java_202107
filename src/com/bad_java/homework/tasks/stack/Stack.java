@@ -3,10 +3,10 @@ package com.bad_java.homework.tasks.stack;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
-class Stack<T extends Comparable<T>> {
-    Entry<T> lastPushed;
-    Entry<T> minimal;
-    HashSet<Entry<T>> hashSet = new HashSet<>();
+public class Stack<T extends Comparable<T>> {
+    private Entry<T> lastPushed;
+    private Entry<T> minimal;
+    private final HashSet<Entry<T>> hashSet = new HashSet<>();
 
     public void push(T elem) {
         Entry<T> newElem;
