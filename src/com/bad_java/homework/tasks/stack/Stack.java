@@ -48,10 +48,5 @@ public class Stack<T extends Comparable<T>> {
             this.prevMinimalElement = prevMinimalElement;
             this.prevPushedElement = prevPushedElement;
         }
-
-        @Override
-        public String toString() {
-            return element.toString();
-        }
     }
 }
