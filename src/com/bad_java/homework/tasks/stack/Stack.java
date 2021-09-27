@@ -1,12 +1,10 @@
 package com.bad_java.homework.tasks.stack;
 
-import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 public class Stack<T extends Comparable<T>> {
     private Entry<T> lastPushed;
     private Entry<T> minimal;
-    private final HashSet<Entry<T>> hashSet = new HashSet<>();
 
     public void push(T elem) {
         Entry<T> newElem;
@@ -17,7 +15,6 @@ public class Stack<T extends Comparable<T>> {
             newElem = new Entry<>(elem, null, lastPushed);
         }
         lastPushed = newElem;
-        hashSet.add(newElem);
     }
 
     public T pop() {
@@ -30,7 +27,6 @@ public class Stack<T extends Comparable<T>> {
         }
         final var copy = lastPushed;
         lastPushed = lastPushed.prevPushedElement;
-        hashSet.remove(copy);
         return copy.element;
     }
 
@@ -40,11 +36,6 @@ public class Stack<T extends Comparable<T>> {
         }
 
         return minimal.element;
-    }
-
-    @Override
-    public String toString() {
-        return hashSet.toString();
     }
 
     private static class Entry<T> {
@@ -62,6 +53,5 @@ public class Stack<T extends Comparable<T>> {
         public String toString() {
             return element.toString();
         }
-
     }
 }
