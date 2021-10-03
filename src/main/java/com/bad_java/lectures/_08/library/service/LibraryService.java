@@ -1,12 +1,16 @@
-package com.bad_java.lectures._03.library.service;
+package com.bad_java.lectures._08.library.service;
 
-import com.bad_java.lectures._03.DynamicArray;
-import com.bad_java.lectures._03.library.domain.Book;
-import com.bad_java.lectures._03.library.domain.BookTicket;
-import com.bad_java.lectures._03.library.domain.User;
-import com.bad_java.lectures._03.library.repository.BookRepository;
-import com.bad_java.lectures._03.library.repository.BookTicketRepository;
+import com.bad_java.lectures._08.CustomOptional;
+import com.bad_java.lectures._08.Predicate;
+import com.bad_java.lectures._08.library.util.DynamicArray;
+import com.bad_java.lectures._08.library.domain.Book;
+import com.bad_java.lectures._08.library.domain.BookTicket;
+import com.bad_java.lectures._08.library.domain.User;
+import com.bad_java.lectures._08.library.repository.BookRepository;
+import com.bad_java.lectures._08.library.repository.BookTicketRepository;
 import lombok.RequiredArgsConstructor;
+
+import java.util.NoSuchElementException;
 
 @RequiredArgsConstructor
 public class LibraryService {
@@ -24,6 +28,7 @@ public class LibraryService {
 
     public Book addBook(User manager, String isbn, String title, String author, int year, double price, int count) {
         System.err.println("Manager " + manager + " trying to add a new book to the library ...");
+
         Book book = bookRepository.findByIsbn(isbn);
         if (book != null) {
             System.err.println("Manager " + manager + " tried to add duplicated book");
@@ -43,13 +48,12 @@ public class LibraryService {
 
     public Book delete(User manager, long bookId) {
         System.err.println("Manager " + manager + " trying to delete a book from library: " + bookId);
-        Book bookToBeDeleted = bookRepository.findById(bookId);
-
-        if (bookToBeDeleted == null) {
-            System.err.println("Cannot find a book with ID: " + bookId);
-            return null;
+        CustomOptional<Book> optionalBook = bookRepository.findById(bookId);
+        if (optionalBook.isEmpty()) {
+            throw new NoSuchElementException();
         }
 
+        Book bookToBeDeleted = optionalBook.get();
         bookRepository.delete(bookToBeDeleted);
         System.err.println("Manager " + manager + " deleted book " + bookToBeDeleted);
         return bookToBeDeleted;
@@ -57,16 +61,20 @@ public class LibraryService {
 
     public BookTicket takeBook(User client, long bookId) {
         System.err.println("Client " + client + " trying to take a book from library: " + bookId);
-        Book bookToBeTaken = bookRepository.findById(bookId);
-        if (bookToBeTaken == null) {
-            System.err.println("Cannot find the book with id: " + bookId);
-            return null;
-        }
+        Book bookToBeTaken = bookRepository
+                .findById(bookId)
+                .filter(new Predicate<Book>() {
+                    @Override
+                    public boolean test(Book book) {
+                        if (book.getCount() < 1) {
+                            System.err.println("qwewqeqw");
+                            return false;
+                        }
+                        return true;
+                    }
+                })
+                .orElseThrow(new NoSuchElementException());
 
-        if (bookToBeTaken.getCount() < 1) {
-            System.err.println("Not enough amount of books with id: " + bookId + " presented at the library to be taken by client: " + client);
-            return null;
-        }
 
         BookTicket ticket = bookTicketRepository.save(BookTicket.builder()
                                                                 .book(bookToBeTaken)
@@ -84,7 +92,7 @@ public class LibraryService {
 
     public Book returnBook(User client, long ticketId) {
         System.err.println("Client " + client + " trying to return a book to the library by ticket: " + ticketId);
-        BookTicket ticket = bookTicketRepository.findById(ticketId);
+        BookTicket ticket = bookTicketRepository.findById(ticketId).get();
         if (ticket == null) {
             System.err.println("Cannot find a ticket with id: " + ticketId);
             return null;
