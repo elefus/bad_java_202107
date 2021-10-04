@@ -7,9 +7,13 @@ import com.bad_java.lectures._03.library.domain.User;
 import com.bad_java.lectures._03.library.repository.BookRepository;
 import com.bad_java.lectures._03.library.repository.BookTicketRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @RequiredArgsConstructor
 public class LibraryService {
+
+    private static final Logger log = LogManager.getLogger(LibraryService.class);
 
     private final BookRepository bookRepository;
     private final BookTicketRepository bookTicketRepository;
@@ -23,6 +27,9 @@ public class LibraryService {
     }
 
     public Book addBook(User manager, String isbn, String title, String author, int year, double price, int count) {
+        log.trace("Manager [{}] trying to add a new book to the library with isbn [{}], title [{}] ...[{}, {}, {}, {}]",
+                manager, isbn, title, author, year, price, count);
+
         System.err.println("Manager " + manager + " trying to add a new book to the library ...");
         Book book = bookRepository.findByIsbn(isbn);
         if (book != null) {
