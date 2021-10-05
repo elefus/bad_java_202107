@@ -4,10 +4,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @EqualsAndHashCode(of = "id")
-public class User {
+public class User implements Serializable {
 
     long id;
     String username;
