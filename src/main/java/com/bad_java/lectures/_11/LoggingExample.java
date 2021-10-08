@@ -1,10 +1,7 @@
 package com.bad_java.lectures._11;
 
 import com.bad_java.lectures._08.library.domain.User;
-import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * log4j
@@ -16,29 +13,30 @@ import org.apache.logging.log4j.Logger;
  *
  * log4j2:
  *  - logger
- *  - appender
  *  - layout
+ *  - appender
  *
  */
-@Log4j2
+@Slf4j
 public class LoggingExample {
 
     /**
-     *    . (root logger) ERROR
-     *    com.bad_java.homework
-     *    com.bad_java.lectures TRACE
-     *    com.bad_java.lectures._10.ResourcesExample
-     *    com.bad_java.lectures._11.LoggingExample
-     *
+     * . (root logger) TRACE
+     * com.bad_java.homework
+     * com.bad_java.lectures
+     * com.bad_java.lectures._10.ResourcesExample
+     * com.bad_java.lectures._11.LoggingExample
+     * <p>
      * LEVELS:
-     *   - fatal
-     *   - error
-     *   - info
-     *   - debug
-     *   - warn
-     *   - trace
+     * - fatal
+     * - error
+     * - info
+     * - debug
+     * - warn
+     * - trace
      */
-    private static final Logger lecturesLog = LogManager.getLogger("com.bad_java.lectures");
+//    private static final Logger log = LoggerFactory.getLogger(LoggingExample.class);
+
 
     public static void main(String[] args) {
         User user = User.builder()
@@ -48,11 +46,6 @@ public class LoggingExample {
                          .type(User.Type.CLIENT)
                          .build();
 
-        Logger root = LogManager.getRootLogger();
-        org.apache.logging.log4j.core.Logger ll = (org.apache.logging.log4j.core.Logger) root;
-        ll.setLevel(Level.TRACE);
-        root.fatal("fatal_root");
-        root.trace("trace_root");
 
 
         try {
@@ -66,10 +59,13 @@ public class LoggingExample {
         log.info("info");
         log.warn("warn");
         log.error("error");
-        log.fatal("fatal");
 
-        lecturesLog.fatal("fatal_lectures");
-
+        // J2SE 1.0
+        // J2SE 1.1
+        // J2SE 1.2
+        // J2SE 1.3
+        // J2SE 1.4
+        // J2SE 5
 //            logger.log(Level.INFO, "User successfully passed validation {},{}", new Object[] {user.getId(), user.getUsername()});
     }
 
