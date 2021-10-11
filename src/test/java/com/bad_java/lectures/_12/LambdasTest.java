@@ -5,9 +5,12 @@ import lombok.Data;
 import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -119,6 +122,14 @@ public class LambdasTest {
     }
 
     @Test
+    void typeInference() {
+
+        ToIntFunction<String> getLength = String::length;
+        Consumer<String> consumer = String::length;
+
+    }
+
+    @Test
     void constructorReference() {
         Person person = new Person("Ivan", "Ivanov", 44);
 
@@ -150,6 +161,46 @@ public class LambdasTest {
         LambdasTest test = new LambdasTest();
         test.delimiter = delimiter;
         return test;
+    }
+
+    @Test
+    void closureExample() {
+
+        int val2 = 0;
+
+        Runnable oldVersion = new Runnable() {
+
+            @Override
+            public void run() {
+                System.out.println(val2);
+            }
+        };
+
+
+        Runnable task = () -> {
+            int val;
+            val = 10;
+
+            val++;
+            System.out.println(val);
+        };
+    }
+
+    @Test
+    void mutableLambda() {
+//        AtomicInteger counter = new AtomicInteger();
+
+        int[] counter = new int[1];
+
+        ((Runnable)() -> {
+            for (int i = 0; i < 10; i++) {
+                counter[0]++;
+            }
+        }).run();
+
+        int result = counter[0];
+
+
     }
 }
 
