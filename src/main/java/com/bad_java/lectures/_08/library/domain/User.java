@@ -1,20 +1,19 @@
-package com.bad_java.lectures._03.library.domain;
+package com.bad_java.lectures._08.library.domain;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serializable;
-
 @Data
 @Builder
 @EqualsAndHashCode(of = "id")
-public class User implements Serializable {
+public class User {
 
     long id;
     String username;
     String password;
     Type type;
+    Ticket ticket;
 
     public enum Type {
         ADMIN,
