@@ -156,9 +156,8 @@ public class FunctionCombination {
         assertThat(greaterThan18.test(new Person("", "", 19))).isTrue();
 
         Predicate<Person> result = isIvan.and(greaterThan18);
-        assertThat(greaterThan18.test(new Person("Ivan", "", 19))).isTrue();
-        assertThat(greaterThan18.test(new Person("Alex", "", 19))).isTrue();
-
+        assertThat(result.test(new Person("Ivan", "", 19))).isTrue();
+        assertThat(result.test(new Person("Alex", "", 19))).isFalse();
     }
 
     private static int getCountVowelsJava8(String str) {
