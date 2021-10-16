@@ -67,7 +67,8 @@ public class CoffeeMachineTerminal {
                 return;
 
             default:
-                throw new IllegalArgumentException();
+                out.println("Unknown type of coffee!");
+                return;
         }
         try {
             machine.make(coffeeSort);

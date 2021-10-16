@@ -21,13 +21,13 @@ public enum CoffeeSort {
         Ingredient.CUP, 1
     ));
 
-    private final Map<Ingredient, Integer> receipt;
+    private final Map<Ingredient, Integer> recipe;
 
-    CoffeeSort(Map<Ingredient, Integer> receipt) {
-        this.receipt = receipt;
+    CoffeeSort(Map<Ingredient, Integer> recipe) {
+        this.recipe = recipe;
     }
 
-    public Map<Ingredient, Integer> getReceipt() {
-        return receipt;
+    public Map<Ingredient, Integer> getRecipe() {
+        return recipe;
     }
 }

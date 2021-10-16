@@ -38,7 +38,7 @@ public class CoffeeMachine {
     }
 
     public void make(CoffeeSort coffeeSort) {
-        Map<Ingredient, Integer> receipt = coffeeSort.getReceipt();
+        Map<Ingredient, Integer> receipt = coffeeSort.getRecipe();
         for (Map.Entry<Ingredient, Integer> receiptIngredient : receipt.entrySet()) {
             Ingredient ingredient = receiptIngredient.getKey();
             Integer expectedAmount = receiptIngredient.getValue();

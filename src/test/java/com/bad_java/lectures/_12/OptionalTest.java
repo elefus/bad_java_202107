@@ -32,14 +32,14 @@ public class OptionalTest {
 
     private static Optional<Client> getClientByName(String name, String surname) {
         if ("Ivan".equals(name) && "Ivanov".equals(surname)) {
-            Person ivan = new Person("Ivan", "Ivanov", 35);
+            com.bad_java.lectures._12.data.Person ivan = new com.bad_java.lectures._12.data.Person("Ivan", "Ivanov", 35);
             License license = new License(
                     LocalDate.of(2020, 1, 1),
                     LocalDate.of(2023, 1, 1), "111-2323", new ArrayList<>(List.of(ivan)));
             return Optional.of(new Client(ivan, license));
         }
         if ("Petr".equals(name) && "Petrov".equals(surname)) {
-            Person ivan = new Person("Petr", "Petrov", 30);
+            com.bad_java.lectures._12.data.Person ivan = new com.bad_java.lectures._12.data.Person("Petr", "Petrov", 30);
             return Optional.of(new Client(ivan, null));
         }
         return Optional.empty();
@@ -50,7 +50,7 @@ public class OptionalTest {
 @AllArgsConstructor
 class Client {
 
-    Person person;
+    com.bad_java.lectures._12.data.Person person;
     License license;
 
     public Optional<License> getLicense() {
@@ -65,6 +65,6 @@ class License {
     LocalDate registrationDate;
     LocalDate expirationDate;
     String id;
-    List<Person> issuers;
+    List<com.bad_java.lectures._12.data.Person> issuers;
 }
 

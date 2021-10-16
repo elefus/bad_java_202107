@@ -15,11 +15,11 @@ public class ComparatorTest {
     @Test
     void comparator() {
         // (Person,Person) -> int
-        Comparator<Person> firstNameComparator = (l, r) -> l.getName().compareTo(r.getName());
-        Comparator<Person> lastNameComparator = (l, r) -> l.getSurname().compareTo(r.getSurname());
+        Comparator<com.bad_java.lectures._12.data.Person> firstNameComparator = (l, r) -> l.getName().compareTo(r.getName());
+        Comparator<com.bad_java.lectures._12.data.Person> lastNameComparator = (l, r) -> l.getSurname().compareTo(r.getSurname());
 
-        Comparator<Person> nameComparator = getPersonComparator(Person::getName);
-        Comparator<Person> surnameComparator = getPersonComparator(Person::getSurname);
+        Comparator<com.bad_java.lectures._12.data.Person> nameComparator = getPersonComparator(com.bad_java.lectures._12.data.Person::getName);
+        Comparator<com.bad_java.lectures._12.data.Person> surnameComparator = getPersonComparator(com.bad_java.lectures._12.data.Person::getSurname);
 
         Comparator<String> lengthComparator = getComparator(String::length);
         List<String> list = new ArrayList<>(List.of("1", "333", "22", ""));
@@ -33,30 +33,30 @@ public class ComparatorTest {
 
     @Test
     void testByMultipleAttributes() {
-        List<Person> original = new ArrayList<>(Arrays.asList(
+        List<com.bad_java.lectures._12.data.Person> original = new ArrayList<>(Arrays.asList(
                 null,
-                new Person("A", "f"),
-                new Person("A", "c"),
-                new Person("B", "a"),
-                new Person("A", "b"),
-                new Person("B", "c"),
-                new Person("C", "a")));
+                new com.bad_java.lectures._12.data.Person("A", "f"),
+                new com.bad_java.lectures._12.data.Person("A", "c"),
+                new com.bad_java.lectures._12.data.Person("B", "a"),
+                new com.bad_java.lectures._12.data.Person("A", "b"),
+                new com.bad_java.lectures._12.data.Person("B", "c"),
+                new com.bad_java.lectures._12.data.Person("C", "a")));
 
-        List<Person> bySurname = new ArrayList<>(original);
-        bySurname.sort(Comparator.nullsLast(Comparator.comparing(Person::getSurname).thenComparing(Person::getName)));
+        List<com.bad_java.lectures._12.data.Person> bySurname = new ArrayList<>(original);
+        bySurname.sort(Comparator.nullsLast(Comparator.comparing(com.bad_java.lectures._12.data.Person::getSurname).thenComparing(com.bad_java.lectures._12.data.Person::getName)));
         bySurname.forEach(System.out::println);
 
         System.out.println("=====");
 
-        List<Person> byName = new ArrayList<>(original);
-        byName.sort(Comparator.nullsFirst(Comparator.comparing(Person::getName)));
+        List<com.bad_java.lectures._12.data.Person> byName = new ArrayList<>(original);
+        byName.sort(Comparator.nullsFirst(Comparator.comparing(com.bad_java.lectures._12.data.Person::getName)));
         byName.forEach(System.out::println);
 
 //        list.sort(Comparator.comparing(Person::getName).thenComparing(Person::getSurname).thenComparing(Person::getAge));
     }
 
     // ((Person) -> String) -> ((Person,Person)-> int)
-    public Comparator<Person> getPersonComparator(Function<Person, String> extractor) {
+    public Comparator<com.bad_java.lectures._12.data.Person> getPersonComparator(Function<com.bad_java.lectures._12.data.Person, String> extractor) {
         return (person1, person2) -> extractor.apply(person1).compareTo(extractor.apply(person2));
     }
 
