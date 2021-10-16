@@ -101,28 +101,28 @@ public class FunctionCombination {
 
     @Test
     void name() {
-        Person ivan = new Person("Ivan", "Ivanov");
+        com.bad_java.lectures._12.data.Person ivan = new com.bad_java.lectures._12.data.Person("Ivan", "Ivanov");
 
         // Person -> Integer
-        Function<Person, Integer> personToNameLength = personStringPropertyToLength(Person::getName, String::length);
+        Function<com.bad_java.lectures._12.data.Person, Integer> personToNameLength = personStringPropertyToLength(com.bad_java.lectures._12.data.Person::getName, String::length);
         assertThat(personToNameLength.apply(ivan)).isEqualTo(4);
 
-        Function<Person, Integer> personToSurnameLength = personStringPropertyToLength(Person::getSurname, String::length);
+        Function<com.bad_java.lectures._12.data.Person, Integer> personToSurnameLength = personStringPropertyToLength(com.bad_java.lectures._12.data.Person::getSurname, String::length);
         assertThat(personToSurnameLength.apply(ivan)).isEqualTo(6);
 
-        Function<Person, Integer> getCountVowelsSurname = personStringPropertyToLength(Person::getSurname, FunctionCombination::getCountVowelsJava8);
+        Function<com.bad_java.lectures._12.data.Person, Integer> getCountVowelsSurname = personStringPropertyToLength(com.bad_java.lectures._12.data.Person::getSurname, FunctionCombination::getCountVowelsJava8);
         assertThat(getCountVowelsSurname.apply(ivan)).isEqualTo(3);
 
-        Function<Person, Integer> getCountVowelsName = personStringPropertyToLength(Person::getName, FunctionCombination::getCountVowelsJava8);
+        Function<com.bad_java.lectures._12.data.Person, Integer> getCountVowelsName = personStringPropertyToLength(com.bad_java.lectures._12.data.Person::getName, FunctionCombination::getCountVowelsJava8);
         assertThat(getCountVowelsName.apply(ivan)).isEqualTo(2);
 
-        Function<Person, String> extractor = Person::getSurname;
-        Function<Person, Integer> getVowels = extractor.andThen(FunctionCombination::getCountVowelsJava8);
-        Function<Person, ?> print = getVowels.andThen(count -> { System.out.println(count); return null; } );
+        Function<com.bad_java.lectures._12.data.Person, String> extractor = com.bad_java.lectures._12.data.Person::getSurname;
+        Function<com.bad_java.lectures._12.data.Person, Integer> getVowels = extractor.andThen(FunctionCombination::getCountVowelsJava8);
+        Function<com.bad_java.lectures._12.data.Person, ?> print = getVowels.andThen(count -> { System.out.println(count); return null; } );
 
         print.apply(ivan);
 
-        Function<String, Person> createPersonWithName = name -> new Person(name, "SURNAME");
+        Function<String, com.bad_java.lectures._12.data.Person> createPersonWithName = name -> new com.bad_java.lectures._12.data.Person(name, "SURNAME");
 
 
         Function<String, String> composed = extractor.compose(createPersonWithName);
@@ -136,29 +136,28 @@ public class FunctionCombination {
     @Test
     void currying() {
         // (String,String,int) -> Person
-        PersonFactory factory = Person::new;
+        PersonFactory factory = com.bad_java.lectures._12.data.Person::new;
 
         // String -> (String -> (int -> Person))
         // String -> String -> int -> Person
-        Function<String, Function<String, Function<Integer, Person>>> curriedFactory =
-                surname -> name -> age -> new Person(name, surname, age);
+        Function<String, Function<String, Function<Integer, com.bad_java.lectures._12.data.Person>>> curriedFactory =
+                surname -> name -> age -> new com.bad_java.lectures._12.data.Person(name, surname, age);
 
-        Function<String, Function<Integer, Person>> plokhoyFactory = curriedFactory.apply("Plokhoy");
-        Function<Integer, Person> semenovFactory = plokhoyFactory.apply("Semenov");
+        Function<String, Function<Integer, com.bad_java.lectures._12.data.Person>> plokhoyFactory = curriedFactory.apply("Plokhoy");
+        Function<Integer, com.bad_java.lectures._12.data.Person> semenovFactory = plokhoyFactory.apply("Semenov");
     }
 
     @Test
     void predicates() {
-        Predicate<Person> greaterThan18 = p -> p.getAge() > 18;
-        Predicate<Person> isIvan = p -> "Ivan".equals(p.getName());
+        Predicate<com.bad_java.lectures._12.data.Person> greaterThan18 = p -> p.getAge() > 18;
+        Predicate<com.bad_java.lectures._12.data.Person> isIvan = p -> "Ivan".equals(p.getName());
 
-        assertThat(greaterThan18.test(new Person("", "", 17))).isFalse();
-        assertThat(greaterThan18.test(new Person("", "", 19))).isTrue();
+        assertThat(greaterThan18.test(new com.bad_java.lectures._12.data.Person("", "", 17))).isFalse();
+        assertThat(greaterThan18.test(new com.bad_java.lectures._12.data.Person("", "", 19))).isTrue();
 
-        Predicate<Person> result = isIvan.and(greaterThan18);
-        assertThat(greaterThan18.test(new Person("Ivan", "", 19))).isTrue();
-        assertThat(greaterThan18.test(new Person("Alex", "", 19))).isTrue();
-
+        Predicate<com.bad_java.lectures._12.data.Person> result = isIvan.and(greaterThan18);
+        assertThat(result.test(new com.bad_java.lectures._12.data.Person("Ivan", "", 19))).isTrue();
+        assertThat(result.test(new com.bad_java.lectures._12.data.Person("Alex", "", 19))).isFalse();
     }
 
     private static int getCountVowelsJava8(String str) {
@@ -182,8 +181,8 @@ public class FunctionCombination {
     }
 
     // ((Person -> String), (String -> Integer)) -> (Person -> Integer)
-    private Function<Person, Integer> personStringPropertyToLength(
-            Function<Person, String> propertyExtractor,
+    private Function<com.bad_java.lectures._12.data.Person, Integer> personStringPropertyToLength(
+            Function<com.bad_java.lectures._12.data.Person, String> propertyExtractor,
             Function<String, Integer> stringToInteger
     ) {
         return person -> {
