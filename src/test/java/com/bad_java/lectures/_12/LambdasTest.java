@@ -1,13 +1,13 @@
 package com.bad_java.lectures._12;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.bad_java.lectures._12.data.Person;
 import org.junit.jupiter.api.Test;
 
 import java.util.Comparator;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.ToIntFunction;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -119,25 +119,33 @@ public class LambdasTest {
     }
 
     @Test
+    void typeInference() {
+
+        ToIntFunction<String> getLength = String::length;
+        Consumer<String> consumer = String::length;
+
+    }
+
+    @Test
     void constructorReference() {
-        Person person = new Person("Ivan", "Ivanov", 44);
+        com.bad_java.lectures._12.data.Person person = new com.bad_java.lectures._12.data.Person("Ivan", "Ivanov", 44);
 
         PersonFactory factory1 = new PersonFactory() {
             @Override
-            public Person create(String name, String surname, int age) {
-                return new Person(name, surname, age);
+            public com.bad_java.lectures._12.data.Person create(String name, String surname, int age) {
+                return new com.bad_java.lectures._12.data.Person(name, surname, age);
             }
         };
 
         // (String,String,int) -> Person
-        PersonFactory factory2 = (name, surname, age) -> new Person(name, surname, age);
-        PersonFactory factory3 = Person::new;
-        Person another = factory3.create("Ivan", "Ivanov", 44);
+        PersonFactory factory2 = (name, surname, age) -> new com.bad_java.lectures._12.data.Person(name, surname, age);
+        PersonFactory factory3 = com.bad_java.lectures._12.data.Person::new;
+        com.bad_java.lectures._12.data.Person another = factory3.create("Ivan", "Ivanov", 44);
         assertThat(person).isEqualTo(another);
 
         // (String,String) -> Person
-        BiFunction<String, String, Person> factory4 = Person::new;
-        Person zero = factory4.apply("Ivan", "Ivanov");
+        BiFunction<String, String, com.bad_java.lectures._12.data.Person> factory4 = com.bad_java.lectures._12.data.Person::new;
+        com.bad_java.lectures._12.data.Person zero = factory4.apply("Ivan", "Ivanov");
         assertThat(zero.getAge()).isZero();
     }
 
@@ -151,29 +159,48 @@ public class LambdasTest {
         test.delimiter = delimiter;
         return test;
     }
-}
 
-@Data
-class Person {
+    @Test
+    void closureExample() {
 
-    private String name;
-    private String surname;
-    private int age;
+        int val2 = 0;
 
-    // (String,String,int) -> Person
-    public Person(String name, String surname, int age) {
-        this.name = name;
-        this.surname = surname;
-        this.age = age;
+        Runnable oldVersion = new Runnable() {
+
+            @Override
+            public void run() {
+                System.out.println(val2);
+            }
+        };
+
+
+        Runnable task = () -> {
+            int val;
+            val = 10;
+
+            val++;
+            System.out.println(val);
+        };
     }
 
-    // (String,String) -> Person
-    public Person(String name, String surname) {
-        this.name = name;
-        this.surname = surname;
-        this.age = 0;
+    @Test
+    void mutableLambda() {
+//        AtomicInteger counter = new AtomicInteger();
+
+        int[] counter = new int[1];
+
+        ((Runnable)() -> {
+            for (int i = 0; i < 10; i++) {
+                counter[0]++;
+            }
+        }).run();
+
+        int result = counter[0];
+
+
     }
 }
+
 
 interface PersonFactory {
 
