@@ -1,12 +1,15 @@
 package com.bad_java.lectures._12;
 
+import static java.util.function.Function.identity;
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
@@ -25,14 +28,18 @@ public class ParseStringTest {
      */
     private List<String> getFrequentlyOccurringWords(String text, int numberWords) {
 
-        return Arrays.stream(text.split("\\W+"))
-                     .map(String::toLowerCase)
-                     .collect(Collectors.groupingBy(Function.identity(),
-                         Collectors.counting())).entrySet().stream()
-                     .sorted(Map.Entry.<String, Long>comparingByValue().reversed()
-                                      .thenComparing(Map.Entry.comparingByKey()))
-                     .map(Entry::getKey).limit(numberWords)
-                     .collect(Collectors.toList());
+        return Pattern.compile("\\W+")
+                      .splitAsStream(text)
+                      .map(String::toLowerCase)
+                      .collect(groupingBy(identity(), counting()))
+                      .entrySet()
+                      .stream()
+                      .sorted(Map.Entry.<String, Long>comparingByValue()
+                                       .reversed()
+                                       .thenComparing(Map.Entry.comparingByKey()))
+                      .map(Entry::getKey)
+                      .limit(numberWords)
+                      .collect(Collectors.toList());
     }
 
     @Test
