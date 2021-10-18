@@ -3,8 +3,10 @@ package com.bad_java.lectures._12;
 import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,6 +42,26 @@ public class ParseStringTest {
                       .limit(numberWords)
                       .collect(Collectors.toList());
     }
+/*    private List<String> getFrequentlyOccurringWords(String text, int numberWords) {
+
+        return Pattern.compile("\\W+").splitAsStream(text)
+                      .map(String::toLowerCase)
+                      .collect(HashMap<String, Integer>::new, (m, c) -> {
+                          if (m.containsKey(c)) {
+                              m.put(c, m.get(c) + 1);
+                          } else {
+                              m.put(c, 1);
+                          }
+                      }, HashMap::putAll)
+                      .entrySet()
+                      .stream()
+                      .sorted(Map.Entry.<String, Integer>comparingByValue()
+                                       .reversed()
+                                       .thenComparing(Map.Entry.comparingByKey()))
+                      .map(Entry::getKey)
+                      .limit(numberWords)
+                      .collect(Collectors.toList());
+    }*/
 
     @Test
     void test2() {
