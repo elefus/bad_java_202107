@@ -3,7 +3,10 @@ package com.bad_java.lectures._12;
 import com.bad_java.lectures._12.data.Person;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Comparator;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -196,8 +199,26 @@ public class LambdasTest {
         }).run();
 
         int result = counter[0];
+    }
 
+    @Test
+    void exceptionsInLambdas() {
+        Callable<Integer> task = () -> {
+            if (ThreadLocalRandom.current().nextBoolean()) {
+                System.out.println("I'm ok");
+                return 42;
+            } else {
+//                 throw new RuntimeException();
+//                 throw new Exception();
+                 throw new IOException();
+            }
+        };
 
+        try {
+            assertThat(task.call()).isEqualTo(42);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

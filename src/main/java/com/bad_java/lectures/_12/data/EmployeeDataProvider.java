@@ -16,7 +16,7 @@ public class EmployeeDataProvider {
                         new Person("Александр", "Дементьев", 28),
                         List.of(
                                 new JobHistoryEntry(1, "qa", "EPAM"),
-                                new JobHistoryEntry(1, "dev", "EPAM"),
+                                new JobHistoryEntry(6, "dev", "EPAM"),
                                 new JobHistoryEntry(1, "dev", "google")
                         )),
                 new Employee(
