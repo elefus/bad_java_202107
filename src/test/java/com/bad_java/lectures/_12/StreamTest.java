@@ -278,6 +278,25 @@ public class StreamTest {
         Map<Boolean, Long> result6 = employees.stream()
                                     .collect(partitioningBy(employee -> employee.getPerson().getAge() > 18, counting()));
         System.out.println(result6);
+
+        // Найти наибольший срок работы на одном месте, среди всех сотрудников
+        OptionalInt result7 = employees.stream()
+                                   .map(Employee::getJobHistory)
+                                   //.map(list -> list.stream())      // List<JobHistoryEntry> -> Stream<JobHistoryEntry>  => Stream<Stream<JobHistoryEntry>>
+                                   .flatMap(Collection::stream)  // List<JobHistoryEntry> -> Stream<JobHistoryEntry>  => Stream<JobHistoryEntry>
+                                   .mapToInt(JobHistoryEntry::getDuration)
+                                   .max();
+
+        System.out.println(result7.orElseThrow());
+
+
+        /*
+           e1[1, 2, 3]
+           e2[3, 3, 3]
+           e3[1, 2]
+
+           1, 2, 3, 3, 3, 3, 1, 2
+         */
     }
 
     private Comparator<Employee> getReversed() {
