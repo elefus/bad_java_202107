@@ -21,7 +21,7 @@ public class DnaParser {
 
     setUpDnaParser(S, substringLength, numberOfThreads);
 
-    Thread thread = new Thread(() -> setUpThreads(numberOfThreads));
+    Thread thread = new Thread(() -> setUpThreads(numberOfThreads + 1));
     thread.start();
     thread.join();
 
