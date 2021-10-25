@@ -16,6 +16,8 @@ public class DnaParser {
   private int substringLength;
   private int stepLength;
 
+  private final Object $lock2 = new Object();
+
   @SneakyThrows
   public void printAllSubstrings(String S, int substringLength, int numberOfThreads) {
 
@@ -86,7 +88,7 @@ public class DnaParser {
     return temp;
   }
 
-  @Synchronized
+  @Synchronized("$lock2")
   private void mergeToResult(Map<String, String> map) {
     map.forEach((key, value) -> substrings.merge(key, value, String::concat));
   }
